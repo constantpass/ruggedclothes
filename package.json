@@ -13,11 +13,11 @@
     "codegen": "shopify hydrogen codegen"
   },
   "dependencies": {
-    "@remix-run/express": "^2.6.0",
-    "@remix-run/node": "^2.6.0",
-    "@remix-run/react": "^2.6.0",
-    "@remix-run/serve": "^2.6.0",
-    "@remix-run/vercel": "^2.6.0",
+    "@remix-run/express": "^1.19.3",
+    "@remix-run/node": "^1.19.3",
+    "@remix-run/react": "^1.19.3",
+    "@remix-run/serve": "^1.19.3",
+    "@remix-run/vercel": "^1.19.3",
     "compression": "^1.7.4",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
@@ -33,7 +33,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.3.1",
+    "@remix-run/dev": "^1.19.3",
     "@shopify/oxygen-workers-types": "^4.0.0",
     "@types/eslint": "^8.44.8",
     "@types/react": "^18.2.43",
