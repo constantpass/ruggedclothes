@@ -9,9 +9,17 @@ import {
 } from '@remix-run/react';
 import {json} from '@remix-run/node';
 
-import './styles/tailwind.css';
-import './styles/app.css';
 import {Layout} from './components/Layout';
+import styles from './styles/app.css';
+import tailwindStyles from './styles/tailwind.css';
+
+// Export CSS modules for Remix 
+export function links() {
+  return [
+    { rel: 'stylesheet', href: tailwindStyles },
+    { rel: 'stylesheet', href: styles }
+  ];
+}
 
 export const loader = async () => {
   return json({

@@ -11,11 +11,11 @@ module.exports = {
     v2_normalizeFormMethod: true,
     v2_routeConvention: true,
   },
+  // Bundle all Shopify related packages
   serverDependenciesToBundle: [
-    "react-server-dom-webpack",
-    "@shopify/hydrogen",
+    "framer-motion",
     "@shopify/hydrogen-react",
-    /@shopify\/hydrogen\/.*/,
   ],
-  watchPaths: ["./public"],
+  // Make sure to watch CSS files for changes
+  watchPaths: ["./public", "./app/styles"],
 };
