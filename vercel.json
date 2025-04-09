@@ -1,12 +1,17 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": null,
+  "outputDirectory": "public",
   "builds": [
     {
-      "src": "server.js",
+      "src": "build/index.js",
       "use": "@vercel/node"
     },
     {
-      "src": "public/**/*",
+      "src": "public/**",
       "use": "@vercel/static"
     }
   ],
@@ -27,7 +32,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "build/index.js"
     }
   ]
 }

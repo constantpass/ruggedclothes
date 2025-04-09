@@ -3,8 +3,11 @@ const express = require("express");
 const compression = require("compression");
 const morgan = require("morgan");
 const path = require("path");
+const fs = require("fs");
 
-const BUILD_DIR = path.join(process.cwd(), "build");
+// Check if we're in Vercel or local
+const isVercel = process.env.VERCEL === '1';
+const BUILD_DIR = isVercel ? './' : path.join(process.cwd(), "build");
 
 const app = express();
 
@@ -33,19 +36,42 @@ app.use(morgan("tiny"));
 
 app.all(
   "*",
-  process.env.NODE_ENV === "development"
-    ? (req, res, next) => {
-        purgeRequireCache();
-
-        return createRequestHandler({
-          build: require(BUILD_DIR),
-          mode: process.env.NODE_ENV,
-        })(req, res, next);
+  (req, res, next) => {
+    try {
+      // For Vercel, we need to include the full path to the build file
+      let buildPath;
+      if (isVercel) {
+        buildPath = './index.js';
+        if (!fs.existsSync(buildPath)) {
+          console.log('Looking for build file...');
+          const files = fs.readdirSync('.');
+          console.log('Files in root directory:', files);
+          
+          if (fs.existsSync('./server/index.js')) {
+            buildPath = './server/index.js';
+          } else if (fs.existsSync('./build/index.js')) {
+            buildPath = './build/index.js';
+          }
+        }
+      } else {
+        buildPath = BUILD_DIR;
       }
-    : createRequestHandler({
-        build: require(BUILD_DIR),
-        mode: process.env.NODE_ENV,
-      })
+      
+      console.log(`Using build path: ${buildPath}`);
+      
+      if (process.env.NODE_ENV === "development") {
+        purgeRequireCache();
+      }
+      
+      return createRequestHandler({
+        build: require(buildPath),
+        mode: process.env.NODE_ENV || 'production',
+      })(req, res, next);
+    } catch (error) {
+      console.error('Error in request handler:', error);
+      res.status(500).send('Server error: ' + error.message);
+    }
+  }
 );
 const port = process.env.PORT || 3000;
 
