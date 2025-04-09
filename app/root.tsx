@@ -6,18 +6,19 @@ import {
   ScrollRestoration,
   useRouteError,
   isRouteErrorResponse,
+  useLoaderData,
 } from '@remix-run/react';
 import {ShopifyProvider} from '@shopify/hydrogen-react';
-import {defer} from '@shopify/remix-oxygen';
+import {defer} from '@remix-run/node';
 import {type LoaderFunctionArgs} from '@remix-run/node';
 
 import './styles/tailwind.css';
 import './styles/app.css';
 import {Layout} from './components/Layout';
 
-export const loader = async ({context}: LoaderFunctionArgs) => {
-  const {storefront} = context;
-  const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN;
+export const loader = async () => {
+  // Mock the Shopify domain since we're using mock data
+  const publicStoreDomain = process.env.PUBLIC_STORE_DOMAIN || 'mockshop.myshopify.com';
 
   return defer({
     publicStoreDomain,
