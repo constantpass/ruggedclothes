@@ -1,21 +1,161 @@
 import {useLoaderData} from '@remix-run/react';
-import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {json} from '@remix-run/node';
 import {Link} from '@remix-run/react';
-import {Image} from '@shopify/hydrogen';
 import {motion} from 'framer-motion';
 
-export async function loader({params, context}: LoaderFunctionArgs) {
+// Mock collections data
+const mockCollections = {
+  'pumping': {
+    id: 'col1',
+    title: 'Pumping',
+    handle: 'pumping',
+    description: 'T-shirts featuring coins and tokens that are on the rise. Get in early with these trending designs!',
+    products: {
+      nodes: [
+        {
+          id: '1',
+          title: 'PEPE PUMP',
+          handle: 'pepe-pump',
+          images: {
+            nodes: [
+              {
+                id: 'img1',
+                url: 'https://placehold.co/600x400/22c55e/ffffff?text=PEPE+PUMP',
+                altText: 'PEPE PUMP T-Shirt',
+                width: 600,
+                height: 400
+              }
+            ]
+          },
+          priceRange: {
+            minVariantPrice: {
+              amount: '35.99',
+              currencyCode: 'USD'
+            }
+          }
+        },
+        {
+          id: '2',
+          title: 'MOON SOON',
+          handle: 'moon-soon',
+          images: {
+            nodes: [
+              {
+                id: 'img2',
+                url: 'https://placehold.co/600x400/8b5cf6/ffffff?text=MOON+SOON',
+                altText: 'MOON SOON T-Shirt',
+                width: 600,
+                height: 400
+              }
+            ]
+          },
+          priceRange: {
+            minVariantPrice: {
+              amount: '29.99',
+              currencyCode: 'USD'
+            }
+          }
+        }
+      ]
+    }
+  },
+  'rugged': {
+    id: 'col2',
+    title: 'Rugged',
+    handle: 'rugged',
+    description: 'For the true degens. T-shirts featuring the most notorious rug pulls and failed projects in crypto history.',
+    products: {
+      nodes: [
+        {
+          id: '3',
+          title: 'DEGEN SZN',
+          handle: 'degen-szn',
+          images: {
+            nodes: [
+              {
+                id: 'img3',
+                url: 'https://placehold.co/600x400/ec4899/ffffff?text=DEGEN+SZN',
+                altText: 'DEGEN SZN T-Shirt',
+                width: 600,
+                height: 400
+              }
+            ]
+          },
+          priceRange: {
+            minVariantPrice: {
+              amount: '32.99',
+              currencyCode: 'USD'
+            }
+          }
+        }
+      ]
+    }
+  },
+  'trending': {
+    id: 'col5',
+    title: 'Trending',
+    handle: 'trending',
+    description: 'Our hottest sellers right now. These shirts are pumping in sales and popularity!',
+    products: {
+      nodes: [
+        {
+          id: '1',
+          title: 'PEPE PUMP',
+          handle: 'pepe-pump',
+          images: {
+            nodes: [
+              {
+                id: 'img1',
+                url: 'https://placehold.co/600x400/22c55e/ffffff?text=PEPE+PUMP',
+                altText: 'PEPE PUMP T-Shirt',
+                width: 600,
+                height: 400
+              }
+            ]
+          },
+          priceRange: {
+            minVariantPrice: {
+              amount: '35.99',
+              currencyCode: 'USD'
+            }
+          }
+        },
+        {
+          id: '4',
+          title: 'WAGMI',
+          handle: 'wagmi',
+          images: {
+            nodes: [
+              {
+                id: 'img4',
+                url: 'https://placehold.co/600x400/3b82f6/ffffff?text=WAGMI',
+                altText: 'WAGMI T-Shirt',
+                width: 600,
+                height: 400
+              }
+            ]
+          },
+          priceRange: {
+            minVariantPrice: {
+              amount: '27.99',
+              currencyCode: 'USD'
+            }
+          }
+        }
+      ]
+    }
+  }
+};
+
+export async function loader({params}) {
   const {handle} = params;
-  const {storefront} = context;
 
   if (!handle) {
     throw new Response('No collection handle provided', {status: 404});
   }
 
-  // Get collection data
-  const {collection} = await storefront.query(COLLECTION_QUERY, {
-    variables: {handle},
-  });
+  // Get collection from mock data
+  const collection = mockCollections[handle];
 
   if (!collection) {
     throw new Response('Collection not found', {status: 404});
@@ -97,11 +237,12 @@ export default function CollectionPage() {
               <Link to={`/products/${product.handle}`}>
                 <div className="relative">
                   {product.images.nodes[0] && (
-                    <Image
-                      data={product.images.nodes[0]}
+                    <img
+                      src={product.images.nodes[0].url}
                       className="w-full h-56 object-cover"
-                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                       alt={product.title}
+                      width={product.images.nodes[0].width}
+                      height={product.images.nodes[0].height}
                     />
                   )}
                   

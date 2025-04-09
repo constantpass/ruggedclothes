@@ -1,26 +1,151 @@
-import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {json} from '@remix-run/node';
+import type {LoaderFunction} from '@remix-run/node';
 import {useLoaderData} from '@remix-run/react';
 import {Link} from '@remix-run/react';
 import {motion} from 'framer-motion';
-import {Image} from '@shopify/hydrogen';
 
-export async function loader({context}: LoaderFunctionArgs) {
-  const {storefront} = context;
-  
-  // Get featured products
-  const {products} = await storefront.query(FEATURED_PRODUCTS_QUERY);
-  
-  // Get collections (categories)
-  const {collections} = await storefront.query(COLLECTIONS_QUERY);
-  
+// Mock data that would normally come from Shopify
+const mockProducts = {
+  nodes: [
+    {
+      id: '1',
+      title: 'PEPE PUMP',
+      handle: 'pepe-pump',
+      images: {
+        nodes: [
+          {
+            id: 'img1',
+            url: 'https://placehold.co/600x400/22c55e/ffffff?text=PEPE+PUMP',
+            altText: 'PEPE PUMP T-Shirt',
+            width: 600,
+            height: 400
+          }
+        ]
+      },
+      priceRange: {
+        minVariantPrice: {
+          amount: '35.99',
+          currencyCode: 'USD'
+        }
+      }
+    },
+    {
+      id: '2',
+      title: 'MOON SOON',
+      handle: 'moon-soon',
+      images: {
+        nodes: [
+          {
+            id: 'img2',
+            url: 'https://placehold.co/600x400/8b5cf6/ffffff?text=MOON+SOON',
+            altText: 'MOON SOON T-Shirt',
+            width: 600,
+            height: 400
+          }
+        ]
+      },
+      priceRange: {
+        minVariantPrice: {
+          amount: '29.99',
+          currencyCode: 'USD'
+        }
+      }
+    },
+    {
+      id: '3',
+      title: 'DEGEN SZN',
+      handle: 'degen-szn',
+      images: {
+        nodes: [
+          {
+            id: 'img3',
+            url: 'https://placehold.co/600x400/ec4899/ffffff?text=DEGEN+SZN',
+            altText: 'DEGEN SZN T-Shirt',
+            width: 600,
+            height: 400
+          }
+        ]
+      },
+      priceRange: {
+        minVariantPrice: {
+          amount: '32.99',
+          currencyCode: 'USD'
+        }
+      }
+    },
+    {
+      id: '4',
+      title: 'WAGMI',
+      handle: 'wagmi',
+      images: {
+        nodes: [
+          {
+            id: 'img4',
+            url: 'https://placehold.co/600x400/3b82f6/ffffff?text=WAGMI',
+            altText: 'WAGMI T-Shirt',
+            width: 600,
+            height: 400
+          }
+        ]
+      },
+      priceRange: {
+        minVariantPrice: {
+          amount: '27.99',
+          currencyCode: 'USD'
+        }
+      }
+    }
+  ],
+  totalCount: 2547
+};
+
+const mockCollections = {
+  nodes: [
+    {
+      id: 'col1',
+      title: 'Pumping',
+      handle: 'pumping',
+      products: {
+        totalCount: 32
+      }
+    },
+    {
+      id: 'col2',
+      title: 'Rugged',
+      handle: 'rugged',
+      products: {
+        totalCount: 14
+      }
+    },
+    {
+      id: 'col3',
+      title: 'New Drops',
+      handle: 'new-drops',
+      products: {
+        totalCount: 26
+      }
+    },
+    {
+      id: 'col4',
+      title: 'Classics',
+      handle: 'classics',
+      products: {
+        totalCount: 41
+      }
+    }
+  ]
+};
+
+export const loader: LoaderFunction = async () => {
+  // In a real implementation, this would fetch from Shopify's Storefront API
   return json({
-    products,
-    collections
+    products: mockProducts,
+    collections: mockCollections
   });
-}
+};
 
 export default function Index() {
-  const {products, collections} = useLoaderData<typeof loader>();
+  const {products, collections} = useLoaderData();
   
   // Map categories to display format with colors
   const categoryColors = {
@@ -34,7 +159,7 @@ export default function Index() {
     id: collection.id,
     handle: collection.handle,
     title: collection.title,
-    color: categoryColors[collection.handle as keyof typeof categoryColors] || 'from-purple-500 to-purple-700',
+    color: categoryColors[collection.handle] || 'from-purple-500 to-purple-700',
     count: collection.products.totalCount
   }));
 
@@ -100,15 +225,13 @@ export default function Index() {
                 >
                   <Link to={`/products/${product.handle}`}>
                     <div className="relative">
-                      {product.images.nodes[0] && (
-                        <Image
-                          data={product.images.nodes[0]}
-                          className="w-full h-48 object-cover"
-                          width="300"
-                          height="200"
-                          alt={product.title}
-                        />
-                      )}
+                      <img
+                        src={product.images.nodes[0].url}
+                        alt={product.title}
+                        className="w-full h-48 object-cover"
+                        width="300"
+                        height="200"
+                      />
                       
                       {/* This would come from a metafield in real application */}
                       <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
@@ -231,7 +354,7 @@ export default function Index() {
             <p className="text-indigo-200 mb-4 relative z-10">Design, sell, and earn profit share from your own shirt designs!</p>
             
             {/* This would link to a custom form or partner app integration */}
-            <a href="/pages/custom-shirt" target="_blank" rel="noopener noreferrer">
+            <Link to="/pages/custom-shirt">
               <motion.button 
                 className="bg-white text-indigo-600 font-bold py-2 px-6 rounded-full hover:bg-indigo-50 transition-colors relative overflow-hidden"
                 whileHover={{ 
@@ -242,7 +365,7 @@ export default function Index() {
               >
                 <span className="relative z-10">Learn More</span>
               </motion.button>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Stats card */}
@@ -274,48 +397,3 @@ export default function Index() {
     </motion.div>
   );
 }
-
-// Query to fetch featured products
-const FEATURED_PRODUCTS_QUERY = `#graphql
-  query FeaturedProducts {
-    products(first: 6, sortKey: BEST_SELLING) {
-      nodes {
-        id
-        title
-        handle
-        images(first: 1) {
-          nodes {
-            id
-            url
-            altText
-            width
-            height
-          }
-        }
-        priceRange {
-          minVariantPrice {
-            amount
-            currencyCode
-          }
-        }
-      }
-      totalCount
-    }
-  }
-`;
-
-// Query to fetch collections (categories)
-const COLLECTIONS_QUERY = `#graphql
-  query Collections {
-    collections(first: 4) {
-      nodes {
-        id
-        title
-        handle
-        products(first: 0) {
-          totalCount
-        }
-      }
-    }
-  }
-`;

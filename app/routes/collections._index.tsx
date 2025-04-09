@@ -1,16 +1,62 @@
 import {useLoaderData} from '@remix-run/react';
-import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {json} from '@remix-run/node';
 import {Link} from '@remix-run/react';
 import {motion} from 'framer-motion';
 
-export async function loader({context}: LoaderFunctionArgs) {
-  const {storefront} = context;
-  
-  // Get all collections
-  const {collections} = await storefront.query(COLLECTIONS_QUERY);
-  
+// Mock collections data
+const mockCollections = {
+  nodes: [
+    {
+      id: 'col1',
+      title: 'Pumping',
+      handle: 'pumping',
+      description: 'T-shirts featuring coins and tokens that are on the rise. Get in early with these trending designs!',
+      products: {
+        totalCount: 32
+      }
+    },
+    {
+      id: 'col2',
+      title: 'Rugged',
+      handle: 'rugged',
+      description: 'For the true degens. T-shirts featuring the most notorious rug pulls and failed projects in crypto history.',
+      products: {
+        totalCount: 14
+      }
+    },
+    {
+      id: 'col3',
+      title: 'New Drops',
+      handle: 'new-drops',
+      description: 'Fresh designs just dropped. Be the first to rock these brand new crypto and meme-inspired t-shirts.',
+      products: {
+        totalCount: 26
+      }
+    },
+    {
+      id: 'col4',
+      title: 'Classics',
+      handle: 'classics',
+      description: 'Timeless crypto memes and references that never go out of style. The OG designs everyone recognizes.',
+      products: {
+        totalCount: 41
+      }
+    },
+    {
+      id: 'col5',
+      title: 'Trending',
+      handle: 'trending',
+      description: 'Our hottest sellers right now. These shirts are pumping in sales and popularity!',
+      products: {
+        totalCount: 28
+      }
+    }
+  ]
+};
+
+export async function loader() {
   return json({
-    collections
+    collections: mockCollections
   });
 }
 
