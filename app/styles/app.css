@@ -1,0 +1,63 @@
+/* Custom styles for the T-Shirt Pump Shopify store */
+
+/* Neon text effect */
+.neon-text {
+  text-shadow: 0 0 5px rgba(168, 85, 247, 0.5),
+               0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+/* Card glow effect */
+.card-glow {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1),
+              0 0 20px rgba(76, 29, 149, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15),
+              0 0 30px rgba(168, 85, 247, 0.2);
+}
+
+/* Animation keyframes for various effects */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(168, 85, 247, 0.5),
+                 0 0 10px rgba(168, 85, 247, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.8),
+                 0 0 20px rgba(168, 85, 247, 0.5),
+                 0 0 30px rgba(168, 85, 247, 0.3);
+  }
+}
+
+/* Apply animations */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
