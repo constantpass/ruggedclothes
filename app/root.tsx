@@ -6,48 +6,38 @@ import {
   ScrollRestoration,
   useRouteError,
   isRouteErrorResponse,
-  useLoaderData,
 } from '@remix-run/react';
-import {ShopifyProvider} from '@shopify/hydrogen-react';
-import {defer} from '@remix-run/node';
-import {type LoaderFunctionArgs} from '@remix-run/node';
+import {json} from '@remix-run/node';
 
 import './styles/tailwind.css';
 import './styles/app.css';
 import {Layout} from './components/Layout';
 
 export const loader = async () => {
-  // Mock the Shopify domain since we're using mock data
-  const publicStoreDomain = process.env.PUBLIC_STORE_DOMAIN || 'mockshop.myshopify.com';
-
-  return defer({
-    publicStoreDomain,
+  return json({
+    publicStoreDomain: 'mockshop.myshopify.com',
   });
 };
 
 export default function App() {
-  const {publicStoreDomain} = useLoaderData<typeof loader>();
-
   return (
-    <ShopifyProvider storeDomain={`https://${publicStoreDomain}`}>
-      <html lang="en">
-        <head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width,initial-scale=1" />
-          <meta name="theme-color" content="#0f0f13" />
-          <link rel="icon" href="/favicon.ico" />
-          <Meta />
-          <Links />
-        </head>
-        <body className="min-h-screen bg-gradient-to-b from-[#0f0f13] to-[#1a1a27] text-white">
-          <Layout>
-            <Outlet />
-          </Layout>
-          <ScrollRestoration />
-          <Scripts />
-        </body>
-      </html>
-    </ShopifyProvider>
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="theme-color" content="#0f0f13" />
+        <link rel="icon" href="/favicon.ico" />
+        <Meta />
+        <Links />
+      </head>
+      <body className="min-h-screen bg-gradient-to-b from-[#0f0f13] to-[#1a1a27] text-white">
+        <Layout>
+          <Outlet />
+        </Layout>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
   );
 }
 
