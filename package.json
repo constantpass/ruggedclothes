@@ -17,6 +17,7 @@
     "@remix-run/node": "^2.6.0",
     "@remix-run/react": "^2.6.0",
     "@remix-run/serve": "^2.6.0",
+    "@remix-run/vercel": "^2.6.0",
     "compression": "^1.7.4",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
