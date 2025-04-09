@@ -1,6 +1,6 @@
-# T-Shirt Pump - Shopify Hydrogen
+# Rugged - Shopify Hydrogen
 
-This is a Shopify Hydrogen implementation of the T-Shirt Pump website, featuring a casino-like aesthetic for t-shirt marketplace.
+This is a Shopify Hydrogen implementation of the Rugged website, featuring a casino-like aesthetic for t-shirt marketplace.
 
 ## Features
 
