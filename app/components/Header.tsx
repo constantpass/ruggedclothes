@@ -79,91 +79,101 @@ export function Header() {
             </Link>
           </div>
           
-          {/* Enhanced search bar with visual effects */}
-          <div className="max-w-md mx-auto mt-3 px-4">
+      {/* Enhanced search bar with visual effects */}
+      <div className="max-w-md mx-auto mt-3 px-4">
+        <form action="/search" method="get">
+          <motion.div 
+            className="relative"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <motion.input 
+              type="text" 
+              name="q"
+              placeholder="Search trending shirts..."
+              className="w-full bg-[#1c1c2e] text-white rounded-full px-4 py-2 pl-10
+                      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75
+                      border border-blue-500/30 transition-all shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+              whileFocus={{ 
+                boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
+                borderColor: 'rgba(59, 130, 246, 0.8)'
+              }}
+              transition={{ duration: 0.2 }}
+            />
+            
+            {/* Animated search icon */}
             <motion.div 
-              className="relative"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              className="absolute left-3 top-2.5 text-blue-400"
+              animate={{ 
+                rotate: [0, 0, 0, -15, 15, 0, 0],
+                scale: [1, 1, 1, 1.1, 1.1, 1, 1]
+              }}
+              transition={{ 
+                duration: 5, 
+                repeat: Infinity,
+                times: [0, 0.8, 0.83, 0.86, 0.89, 0.92, 1]
+              }}
             >
-              <motion.input 
-                type="text" 
-                placeholder="Search trending shirts..."
-                className="w-full bg-[#1c1c2e] text-white rounded-full px-4 py-2 pl-10
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75
-                       border border-blue-500/30 transition-all shadow-[0_0_15px_rgba(59,130,246,0.2)]"
-                whileFocus={{ 
-                  boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
-                  borderColor: 'rgba(59, 130, 246, 0.8)'
-                }}
-                transition={{ duration: 0.2 }}
-              />
-              
-              {/* Animated search icon */}
-              <motion.div 
-                className="absolute left-3 top-2.5 text-blue-400"
-                animate={{ 
-                  rotate: [0, 0, 0, -15, 15, 0, 0],
-                  scale: [1, 1, 1, 1.1, 1.1, 1, 1]
-                }}
-                transition={{ 
-                  duration: 5, 
-                  repeat: Infinity,
-                  times: [0, 0.8, 0.83, 0.86, 0.89, 0.92, 1]
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-                </svg>
-              </motion.div>
-              
-              {/* Search action button */}
-              <div className="absolute right-1 top-1">
-                <motion.button 
-                  className="bg-blue-600 hover:bg-blue-700 text-white rounded-full h-7 w-7 flex items-center justify-center"
-                  whileHover={{ scale: 1.1, boxShadow: '0 0 8px rgba(59, 130, 246, 0.6)' }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </motion.button>
-              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+              </svg>
             </motion.div>
             
-            {/* Trending searches pills */}
-            <div className="flex mt-2 overflow-x-auto pb-2 justify-center space-x-2 text-xs">
-              <motion.span 
-                className="px-2 py-1 rounded-full text-purple-300 bg-purple-900/20 border border-purple-500/20 whitespace-nowrap cursor-pointer"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 5px rgba(168, 85, 247, 0.5)' }}
-                whileTap={{ scale: 0.95 }}
+            {/* Search action button */}
+            <button type="submit" className="absolute right-1 top-1">
+              <motion.div 
+                className="bg-blue-600 hover:bg-blue-700 text-white rounded-full h-7 w-7 flex items-center justify-center"
+                whileHover={{ scale: 1.1, boxShadow: '0 0 8px rgba(59, 130, 246, 0.6)' }}
+                whileTap={{ scale: 0.9 }}
               >
-                #PEPE
-              </motion.span>
-              <motion.span 
-                className="px-2 py-1 rounded-full text-green-300 bg-green-900/20 border border-green-500/20 whitespace-nowrap cursor-pointer"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 5px rgba(34, 197, 94, 0.5)' }}
-                whileTap={{ scale: 0.95 }}
-              >
-                #PUMP
-              </motion.span>
-              <motion.span 
-                className="px-2 py-1 rounded-full text-blue-300 bg-blue-900/20 border border-blue-500/20 whitespace-nowrap cursor-pointer"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 5px rgba(59, 130, 246, 0.5)' }}
-                whileTap={{ scale: 0.95 }}
-              >
-                #WAGMI
-              </motion.span>
-              <motion.span 
-                className="px-2 py-1 rounded-full text-pink-300 bg-pink-900/20 border border-pink-500/20 whitespace-nowrap cursor-pointer"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 5px rgba(236, 72, 153, 0.5)' }}
-                whileTap={{ scale: 0.95 }}
-              >
-                #MOON
-              </motion.span>
-            </div>
-          </div>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </motion.div>
+            </button>
+          </motion.div>
+        </form>
+        
+        {/* Trending searches pills - linking to search page */}
+        <div className="flex mt-2 overflow-x-auto pb-2 justify-center space-x-2 text-xs">
+          <Link to="/search?q=PEPE">
+            <motion.span 
+              className="px-2 py-1 rounded-full text-purple-300 bg-purple-900/20 border border-purple-500/20 whitespace-nowrap cursor-pointer"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 5px rgba(168, 85, 247, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              #PEPE
+            </motion.span>
+          </Link>
+          <Link to="/search?q=PUMP">
+            <motion.span 
+              className="px-2 py-1 rounded-full text-green-300 bg-green-900/20 border border-green-500/20 whitespace-nowrap cursor-pointer"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 5px rgba(34, 197, 94, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              #PUMP
+            </motion.span>
+          </Link>
+          <Link to="/search?q=WAGMI">
+            <motion.span 
+              className="px-2 py-1 rounded-full text-blue-300 bg-blue-900/20 border border-blue-500/20 whitespace-nowrap cursor-pointer"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 5px rgba(59, 130, 246, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              #WAGMI
+            </motion.span>
+          </Link>
+          <Link to="/search?q=MOON">
+            <motion.span 
+              className="px-2 py-1 rounded-full text-pink-300 bg-pink-900/20 border border-pink-500/20 whitespace-nowrap cursor-pointer"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 5px rgba(236, 72, 153, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              #MOON
+            </motion.span>
+          </Link>
         </div>
+      </div>
       )}
 
       {/* Ticker bar with bubbles */}
