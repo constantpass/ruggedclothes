@@ -1,6 +1,6 @@
 # Migration Steps - Firebase to Shopify Hydrogen
 
-This document outlines the steps taken to migrate the T-Shirt Pump application from a Firebase-backed React application to a Shopify Hydrogen application.
+This document outlines the steps taken to migrate the Rugged application from a Firebase-backed React application to a Shopify Hydrogen application.
 
 ## 1. Project Setup
 

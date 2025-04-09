@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <h3 className="text-xl font-bold neon-text">T-Shirt Pump</h3>
+            <h3 className="text-xl font-bold neon-text">Rugged</h3>
             <p className="text-purple-300 mt-1">The #1 T-Shirt Marketplace</p>
           </div>
           
@@ -21,7 +21,7 @@ export function Footer() {
         </div>
         
         <div className="mt-8 pt-8 border-t border-[#2c2c44] text-center text-gray-400 text-sm">
-          <p>© {currentYear} T-Shirt Pump. All rights reserved.</p>
+          <p>© {currentYear} Rugged. All rights reserved.</p>
           <div className="mt-2 space-x-4">
             <Link to="/policies/privacy-policy" className="hover:text-purple-400 transition-colors">Privacy Policy</Link>
             <Link to="/policies/terms-of-service" className="hover:text-purple-400 transition-colors">Terms of Service</Link>

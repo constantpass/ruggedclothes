@@ -5322,7 +5322,7 @@ function Footer() {
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("footer", { className: "bg-[#0a0a10] text-white py-8 mt-12 border-t border-[#2c2c44]", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "container mx-auto px-4", children: [
     /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex flex-col md:flex-row justify-between items-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mb-4 md:mb-0", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-xl font-bold neon-text", children: "T-Shirt Pump" }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-xl font-bold neon-text", children: "Rugged" }),
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-purple-300 mt-1", children: "The #1 T-Shirt Marketplace" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex space-x-6", children: [
@@ -5336,7 +5336,7 @@ function Footer() {
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { children: [
         "\xA9 ",
         currentYear,
-        " T-Shirt Pump. All rights reserved."
+        " Rugged. All rights reserved."
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mt-2 space-x-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react30.Link, { to: "/policies/privacy-policy", className: "hover:text-purple-400 transition-colors", children: "Privacy Policy" }),
