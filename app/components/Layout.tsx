@@ -1,6 +1,7 @@
 import {Header} from './Header';
 import {Footer} from './Footer';
 import {Cart} from './Cart';
+import {Sidebar} from './Sidebar';
 import {Suspense} from 'react';
 
 export function Layout({children}: {children: React.ReactNode}) {
@@ -15,7 +16,10 @@ export function Layout({children}: {children: React.ReactNode}) {
         
         <Header />
         
-        <main role="main" id="mainContent" className="flex-grow">
+        {/* Add the sidebar */}
+        <Sidebar />
+        
+        <main role="main" id="mainContent" className="flex-grow lg:ml-48 transition-all duration-300">
           {children}
         </main>
         

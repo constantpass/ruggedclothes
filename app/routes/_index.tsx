@@ -3,6 +3,7 @@ import type {LoaderFunction} from '@remix-run/node';
 import {useLoaderData} from '@remix-run/react';
 import {Link} from '@remix-run/react';
 import {motion} from 'framer-motion';
+import {ShirtCarousel} from '../components/ShirtCarousel';
 
 // Mock data that would normally come from Shopify
 const mockProducts = {
@@ -179,29 +180,27 @@ export default function Index() {
       transition={{duration: 0.5}}
     >
       <section className="mb-12">
-        {/* Featured banner */}
-        <div className="bg-gradient-to-br from-[#151522] to-[#1c1c2e] p-8 rounded-xl border border-[#2c2c44] relative overflow-hidden">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-6 md:mb-0">
-              <h2 className="text-3xl font-bold text-white mb-4 neon-text">T-Shirt Pump</h2>
-              <p className="text-gray-300 mb-6">The #1 marketplace for trending t-shirts with casino-like dynamics!</p>
-              <Link to="/collections/trending">
-                <motion.button 
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full shadow-lg"
-                  whileHover={{scale: 1.05, boxShadow: '0 0 15px rgba(168,85,247,0.5)'}}
-                  whileTap={{scale: 0.98}}
-                >
-                  Explore Trending Shirts
-                </motion.button>
-              </Link>
-            </div>
-            <div className="md:w-1/2 flex justify-center">
-              {/* Placeholder for featured product image */}
-              <div className="w-64 h-64 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                Featured Shirt
-              </div>
-            </div>
+        {/* Featured Carousel */}
+        <div className="bg-gradient-to-br from-[#151522] to-[#1c1c2e] p-4 md:p-6 rounded-xl border border-[#2c2c44] relative overflow-hidden">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 neon-text">
+              Featured Shirts
+            </h2>
+            <Link to="/collections/trending" className="text-pink-400 hover:text-pink-300 transition-colors">
+              <motion.div 
+                className="flex items-center"
+                whileHover={{ x: 3 }}
+              >
+                <span>View All</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </motion.div>
+            </Link>
           </div>
+          
+          {/* Import our new ShirtCarousel component */}
+          <ShirtCarousel />
         </div>
       </section>
       
@@ -217,11 +216,18 @@ export default function Index() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {products.nodes.slice(0, 4).map((product) => (
+              {products.nodes.slice(0, 4).map((product, index) => (
                 <motion.div 
                   key={product.id}
-                  className="bg-[#151522] rounded-xl overflow-hidden border border-[#2c2c44] card-glow"
-                  whileHover={{y: -5, boxShadow: '0 10px 25px rgba(0,0,0,0.3)'}}
+                  className="bg-[#151522] rounded-xl overflow-hidden border border-pink-500/20 card-glow"
+                  whileHover={{
+                    y: -5, 
+                    boxShadow: '0 10px 25px rgba(236, 72, 153, 0.3)',
+                    borderColor: 'rgba(236, 72, 153, 0.5)'
+                  }}
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
                   <Link to={`/products/${product.handle}`}>
                     <div className="relative">
@@ -233,17 +239,69 @@ export default function Index() {
                         height="200"
                       />
                       
-                      {/* This would come from a metafield in real application */}
-                      <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                        +120%
+                      {/* Enhanced price growth indicator */}
+                      <motion.div 
+                        className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold
+                                  shadow-lg border border-green-400 flex items-center"
+                        animate={{
+                          scale: [1, 1.05, 1],
+                          boxShadow: [
+                            '0 0 0px rgba(34, 197, 94, 0.3)',
+                            '0 0 8px rgba(34, 197, 94, 0.6)',
+                            '0 0 0px rgba(34, 197, 94, 0.3)'
+                          ]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <span className="mr-1">↑</span>
+                        <span>+{(120 + index * 40)}%</span>
+                      </motion.div>
+                      
+                      {/* Creator tag */}
+                      <div className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-1 rounded text-xs backdrop-blur-sm">
+                        by <span className="text-purple-300">Creator{product.id}</span>
                       </div>
                     </div>
                     
                     <div className="p-4">
-                      <h3 className="font-bold">{product.title}</h3>
-                      <p className="text-purple-400 mt-1">
-                        ${product.priceRange.minVariantPrice.amount}
-                      </p>
+                      {/* Product name with glow effect */}
+                      <motion.h3 
+                        className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300"
+                        whileHover={{
+                          textShadow: '0 0 8px rgba(255,255,255,0.5)'
+                        }}
+                      >
+                        {product.title}
+                      </motion.h3>
+                      
+                      <div className="flex justify-between items-center mt-2">
+                        {/* Price with dynamic animation */}
+                        <motion.p 
+                          className="text-purple-400 font-bold"
+                          animate={{ y: [0, -2, 0] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
+                        >
+                          ${product.priceRange.minVariantPrice.amount}
+                        </motion.p>
+                        
+                        {/* Sales count */}
+                        <p className="text-xs text-gray-400">
+                          {800 + (index * 123)} sold
+                        </p>
+                      </div>
+                      
+                      {/* Buy button */}
+                      <motion.button 
+                        className="w-full mt-3 bg-gradient-to-r from-purple-600/90 to-pink-600/90 text-white py-1.5 rounded-lg
+                                 text-sm font-medium"
+                        whileHover={{
+                          scale: 1.03,
+                          boxShadow: '0 0 12px rgba(168, 85, 247, 0.5)'
+                        }}
+                        whileTap={{ scale: 0.97 }}
+                      >
+                        Buy Now
+                      </motion.button>
                     </div>
                   </Link>
                 </motion.div>
@@ -300,25 +358,93 @@ export default function Index() {
         </div>
         
         <div className="lg:col-span-1">
-          {/* Trending Keywords */}
-          <div className="mt-8 bg-[#151522] p-4 rounded-xl border border-[#2c2c44] card-glow">
-            <h2 className="text-xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text">
+          {/* Enhanced Trending Keywords */}
+          <div className="mt-8 bg-[#151522] p-4 rounded-xl border border-purple-500/20 card-glow">
+            <h2 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text">
               Trending Keywords
             </h2>
+            
+            {/* Search bar above keywords */}
+            <div className="mb-4 relative">
+              <input 
+                type="text" 
+                placeholder="Search keywords..."
+                className="w-full bg-[#1c1c2e] text-white rounded-lg px-4 py-2 pl-10
+                      border border-purple-500/20 focus:border-purple-500/50 focus:outline-none
+                      focus:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all"
+              />
+              <div className="absolute left-3 top-2.5 text-purple-400">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                </svg>
+              </div>
+            </div>
+            
             <div className="flex flex-wrap gap-2">
-              {['PEPE', 'MOON', 'DEGEN', 'WAGMI', 'HODL', 'APE', 'BULL', 'PUMP', 'LAMBO', 'GEM'].map((keyword) => (
-                <motion.span 
-                  key={keyword}
-                  className="bg-[#1c1c2e] px-3 py-1 rounded-full text-sm cursor-pointer border border-[#2c2c44]"
-                  whileHover={{ 
-                    scale: 1.05, 
-                    backgroundColor: '#2a2a44',
-                    boxShadow: '0 0 12px rgba(168,85,247,0.5)' 
-                  }}
-                >
-                  #{keyword}
-                </motion.span>
-              ))}
+              {[
+                {keyword: 'PEPE', intensity: 95, color: 'green'},
+                {keyword: 'MOON', intensity: 82, color: 'blue'},
+                {keyword: 'DEGEN', intensity: 75, color: 'pink'},
+                {keyword: 'WAGMI', intensity: 65, color: 'purple'},
+                {keyword: 'HODL', intensity: 60, color: 'orange'},
+                {keyword: 'APE', intensity: 55, color: 'yellow'},
+                {keyword: 'BULL', intensity: 50, color: 'red'},
+                {keyword: 'PUMP', intensity: 48, color: 'green'},
+                {keyword: 'LAMBO', intensity: 45, color: 'blue'},
+                {keyword: 'GEM', intensity: 40, color: 'indigo'}
+              ].map((item) => {
+                const colorMap = {
+                  green: 'text-green-400 bg-green-900/20 border-green-500/20 hover:bg-green-900/40 hover:border-green-500/40',
+                  blue: 'text-blue-400 bg-blue-900/20 border-blue-500/20 hover:bg-blue-900/40 hover:border-blue-500/40',
+                  pink: 'text-pink-400 bg-pink-900/20 border-pink-500/20 hover:bg-pink-900/40 hover:border-pink-500/40',
+                  purple: 'text-purple-400 bg-purple-900/20 border-purple-500/20 hover:bg-purple-900/40 hover:border-purple-500/40',
+                  orange: 'text-orange-400 bg-orange-900/20 border-orange-500/20 hover:bg-orange-900/40 hover:border-orange-500/40',
+                  yellow: 'text-yellow-400 bg-yellow-900/20 border-yellow-500/20 hover:bg-yellow-900/40 hover:border-yellow-500/40',
+                  red: 'text-red-400 bg-red-900/20 border-red-500/20 hover:bg-red-900/40 hover:border-red-500/40',
+                  indigo: 'text-indigo-400 bg-indigo-900/20 border-indigo-500/20 hover:bg-indigo-900/40 hover:border-indigo-500/40'
+                };
+                const colorClass = colorMap[item.color as keyof typeof colorMap];
+                
+                // Scale font size based on intensity
+                const fontSize = 12 + (item.intensity / 20);
+                  
+                return (
+                  <motion.div
+                    key={item.keyword}
+                    className={`px-3 py-1 rounded-full cursor-pointer
+                             border ${colorClass} transition-all duration-300`}
+                    style={{ fontSize: `${fontSize}px` }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      boxShadow: `0 0 12px rgba(168,85,247,0.5)`,
+                      y: -2
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: Math.random() * 0.3 }}
+                  >
+                    <div className="flex items-center">
+                      <span className="mr-1">#</span>
+                      <span>{item.keyword}</span>
+                      <motion.span 
+                        className="ml-1.5 text-xs"
+                        animate={{ 
+                          opacity: [0.7, 1, 0.7],
+                          y: [0, -1, 0] 
+                        }}
+                        transition={{ 
+                          duration: 1.5, 
+                          repeat: Infinity,
+                          delay: Math.random() * 2
+                        }}
+                      >
+                        +{item.intensity}%
+                      </motion.span>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
           

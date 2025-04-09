@@ -127,10 +127,10 @@ __export(root_exports, {
   links: () => links,
   loader: () => loader
 });
-var import_react33 = require("@remix-run/react"), import_node2 = require("@remix-run/node");
+var import_react36 = require("@remix-run/react"), import_node2 = require("@remix-run/node");
 
 // app/components/Header.tsx
-var import_react27 = require("react"), import_react28 = require("@remix-run/react");
+var import_react28 = require("react"), import_react29 = require("@remix-run/react");
 
 // node_modules/framer-motion/dist/es/motion/index.mjs
 var React = __toESM(require("react"), 1), import_react12 = require("react");
@@ -4929,12 +4929,12 @@ var AnimatePresence = ({ children, custom, initial = !0, onExitComplete, exitBef
 
 // app/components/SalesTicker.tsx
 var import_react26 = require("react"), import_jsx_runtime2 = require("react/jsx-runtime"), mockSales = [
-  { username: "Crypto_Maxx", product: "PEPE PUMP Tee", amount: 29.99, timeAgo: "2 mins ago" },
-  { username: "MoonGirl", product: "DEGEN SZN Tee", amount: 32.99, timeAgo: "5 mins ago" },
-  { username: "HodlKing", product: "WAGMI Tee", amount: 27.99, timeAgo: "12 mins ago" },
-  { username: "DiamondHands", product: "MOON SOON Tee", amount: 29.99, timeAgo: "18 mins ago" },
-  { username: "SatoshiWannabe", product: "BULLISH AF Tee", amount: 35.99, timeAgo: "24 mins ago" },
-  { username: "CryptoQueen", product: "NGMI Tee", amount: 28.99, timeAgo: "35 mins ago" }
+  { txId: "tx_572829", username: "Crypto_Maxx", product: "PEPE PUMP Tee", amount: 29.99, timeAgo: "2 mins ago", growth: "+120%" },
+  { txId: "tx_572828", username: "MoonGirl", product: "DEGEN SZN Tee", amount: 32.99, timeAgo: "5 mins ago", growth: "+85%" },
+  { txId: "tx_572825", username: "HodlKing", product: "WAGMI Tee", amount: 27.99, timeAgo: "12 mins ago", growth: "+43%" },
+  { txId: "tx_572821", username: "DiamondHands", product: "MOON SOON Tee", amount: 29.99, timeAgo: "18 mins ago", growth: "+178%" },
+  { txId: "tx_572819", username: "SatoshiWannabe", product: "BULLISH AF Tee", amount: 35.99, timeAgo: "24 mins ago", growth: "+32%" },
+  { txId: "tx_572814", username: "CryptoQueen", product: "NGMI Tee", amount: 28.99, timeAgo: "35 mins ago", growth: "+95%" }
 ];
 function SalesTicker() {
   let [sales] = (0, import_react26.useState)(mockSales), [currentIndex, setCurrentIndex] = (0, import_react26.useState)(0), currentSale = sales[currentIndex];
@@ -4943,7 +4943,7 @@ function SalesTicker() {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % sales.length);
     }, 4e3);
     return () => clearInterval(interval);
-  }, [sales.length]), /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "bg-[#151522] py-1 overflow-hidden border-y border-[#2c2c44]", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "container mx-auto px-4", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+  }, [sales.length]), /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "bg-[#151522] py-2 overflow-hidden border-y border-[#2c2c44]", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "container mx-auto px-4", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
     motion.div,
     {
       initial: { opacity: 0, y: 20 },
@@ -4952,75 +4952,192 @@ function SalesTicker() {
       transition: { duration: 0.5 },
       className: "flex items-center justify-center text-sm text-center",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "text-green-400 animate-pulse mr-2", children: "\u2022" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          motion.div,
+          {
+            className: "text-green-400 mr-2 h-2 w-2 rounded-full bg-green-400",
+            animate: {
+              scale: [1, 1.5, 1],
+              boxShadow: ["0 0 0 0 rgba(34, 197, 94, 0.4)", "0 0 0 4px rgba(34, 197, 94, 0.2)", "0 0 0 0 rgba(34, 197, 94, 0)"]
+            },
+            transition: { duration: 2, repeat: 1 / 0 }
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          motion.span,
+          {
+            className: "font-mono text-xs text-pink-400 mr-2 hidden sm:inline-block",
+            animate: { opacity: [0.7, 1, 0.7] },
+            transition: { duration: 1.5, repeat: 1 / 0 },
+            children: currentSale.txId
+          }
+        ),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: "text-gray-300", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "font-medium", children: currentSale.username }),
-          " just purchased",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            motion.span,
+            {
+              className: "font-medium text-pink-300",
+              animate: { textShadow: ["0 0 0px rgba(236, 72, 153, 0)", "0 0 4px rgba(236, 72, 153, 0.7)", "0 0 0px rgba(236, 72, 153, 0)"] },
+              transition: { duration: 2, repeat: 1 / 0 },
+              children: currentSale.username
+            }
+          ),
           " ",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "font-medium text-purple-400", children: currentSale.product }),
-          " for",
+          "just purchased",
           " ",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: "font-medium text-green-400", children: [
-            "$",
-            currentSale.amount
-          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            motion.span,
+            {
+              className: "font-medium text-purple-400",
+              whileInView: { scale: [1, 1.05, 1] },
+              transition: { duration: 1, times: [0, 0.5, 1] },
+              children: currentSale.product
+            }
+          ),
+          " ",
+          "for",
+          " ",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+            motion.span,
+            {
+              className: "font-medium text-green-400",
+              animate: { y: [0, -2, 0] },
+              transition: { duration: 1.5, repeat: 1 / 0 },
+              children: [
+                "$",
+                currentSale.amount
+              ]
+            }
+          ),
+          " ",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            motion.span,
+            {
+              className: "font-bold text-green-500 bg-green-900/20 px-1.5 py-0.5 rounded-md ml-1",
+              animate: {
+                boxShadow: ["0 0 0px rgba(34, 197, 94, 0)", "0 0 5px rgba(34, 197, 94, 0.5)", "0 0 0px rgba(34, 197, 94, 0)"],
+                scale: [1, 1.03, 1]
+              },
+              transition: { duration: 2, repeat: 1 / 0 },
+              children: currentSale.growth
+            }
+          ),
           " ",
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "text-gray-500", children: currentSale.timeAgo })
         ] })
       ]
     },
-    currentIndex
-  ) }) });
+    currentSale.txId
+  ) }) }) });
 }
 
 // app/components/TopTicker.tsx
-var import_jsx_runtime3 = require("react/jsx-runtime"), mockStats = [
-  { label: "24h Volume", value: "$158,923", change: "+15.2%", positive: !0 },
-  { label: "Active Sellers", value: "843", change: "+12", positive: !0 },
-  { label: "Total T-Shirts", value: "2,547", change: "+83", positive: !0 },
-  { label: "Avg. Price", value: "$32.42", change: "-1.2%", positive: !1 },
-  { label: "Recent Sales", value: "432", change: "+53", positive: !0 }
+var import_react27 = require("react"), import_jsx_runtime3 = require("react/jsx-runtime"), mockStats = [
+  { label: "24h Volume", value: "$158,923", change: "+15.2%", positive: !0, color: "text-green-400" },
+  { label: "Active Sellers", value: "843", change: "+12", positive: !0, color: "text-purple-400" },
+  { label: "Total T-Shirts", value: "2,547", change: "+83", positive: !0, color: "text-blue-400" },
+  { label: "Avg. Price", value: "$32.42", change: "-1.2%", positive: !1, color: "text-red-400" },
+  { label: "Recent Sales", value: "432", change: "+53", positive: !0, color: "text-pink-400" }
 ];
 function TopTicker() {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "bg-[#0a0a10] border-b border-[#2c2c44]", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "container mx-auto py-2 px-4 overflow-x-auto", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "flex space-x-6 md:space-x-12 justify-start md:justify-center min-w-max", children: mockStats.map((stat, index) => /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
-      motion.div,
-      {
-        className: `w-2 h-2 rounded-full ${stat.positive ? "bg-green-400" : "bg-red-400"} mr-2 flex-shrink-0`,
-        animate: {
-          scale: [1, 1.5, 1],
-          opacity: [1, 0.8, 1]
+  let [hoveredStat, setHoveredStat] = (0, import_react27.useState)(null);
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "bg-[#0a0a10] border-b border-[#2c2c44]", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "container mx-auto py-2 px-4 overflow-x-auto", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+    motion.div,
+    {
+      className: "flex space-x-6 md:space-x-12 justify-start md:justify-center min-w-max",
+      initial: { x: 0 },
+      animate: { x: [-10, 10, -10] },
+      transition: {
+        duration: 10,
+        repeat: 1 / 0,
+        repeatType: "mirror",
+        ease: "linear"
+      },
+      children: mockStats.map((stat, index) => /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
+        motion.div,
+        {
+          className: "flex items-center cursor-pointer",
+          whileHover: { scale: 1.05 },
+          onMouseEnter: () => setHoveredStat(stat.label),
+          onMouseLeave: () => setHoveredStat(null),
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+              motion.div,
+              {
+                className: `w-2 h-2 rounded-full ${stat.positive ? "bg-green-400" : "bg-red-400"} mr-2 flex-shrink-0`,
+                animate: {
+                  scale: [1, 1.5, 1],
+                  opacity: [1, 0.8, 1],
+                  boxShadow: hoveredStat === stat.label ? ["0 0 0px rgba(255,255,255,0)", "0 0 10px rgba(255,255,255,0.5)", "0 0 0px rgba(255,255,255,0)"] : "0 0 0px rgba(255,255,255,0)"
+                },
+                transition: {
+                  duration: 2,
+                  repeat: 1 / 0,
+                  delay: index * 0.3
+                }
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "mr-1 text-xs text-gray-400 font-medium", children: [
+              stat.label,
+              ":"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+              motion.div,
+              {
+                className: `text-xs font-bold ${hoveredStat === stat.label ? stat.color : "text-white"}`,
+                animate: {
+                  textShadow: hoveredStat === stat.label ? ["0 0 0px rgba(255,255,255,0)", "0 0 5px rgba(255,255,255,0.7)", "0 0 0px rgba(255,255,255,0)"] : "0 0 0px rgba(255,255,255,0)"
+                },
+                transition: {
+                  duration: 1.5,
+                  repeat: 1 / 0
+                },
+                children: stat.value
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+              motion.div,
+              {
+                className: `ml-1.5 text-xs ${stat.positive ? "text-green-400" : "text-red-400"}`,
+                animate: {
+                  y: [0, -2, 0],
+                  opacity: hoveredStat === stat.label ? [0.7, 1, 0.7] : 1
+                },
+                transition: {
+                  y: {
+                    duration: 1.5,
+                    repeat: 1 / 0
+                  },
+                  opacity: {
+                    duration: 1,
+                    repeat: 1 / 0
+                  }
+                },
+                children: stat.change
+              }
+            )
+          ]
         },
-        transition: {
-          duration: 2,
-          repeat: 1 / 0,
-          delay: index * 0.3
-        }
-      }
-    ),
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "mr-1 text-xs text-gray-400 font-medium", children: [
-      stat.label,
-      ":"
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "text-xs font-bold", children: stat.value }),
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: `ml-1.5 text-xs ${stat.positive ? "text-green-400" : "text-red-400"}`, children: stat.change })
-  ] }, stat.label)) }) }) });
+        stat.label
+      ))
+    }
+  ) }) });
 }
 
 // app/components/Header.tsx
 var import_jsx_runtime4 = require("react/jsx-runtime");
 function Header() {
-  let [isMobileMenuOpen, setIsMobileMenuOpen] = (0, import_react27.useState)(!1), { pathname } = (0, import_react28.useLocation)(), params = (0, import_react28.useParams)(), isHome = pathname === "/", isProductPage = pathname.includes("/products/");
+  let [isMobileMenuOpen, setIsMobileMenuOpen] = (0, import_react28.useState)(!1), { pathname } = (0, import_react29.useLocation)(), params = (0, import_react29.useParams)(), isHome = pathname === "/", isProductPage = pathname.includes("/products/");
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "sticky top-0 z-50 bg-[#0a0a10]", children: [
     /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "border-b border-[#2c2c44]", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "container mx-auto px-4 py-3 flex justify-between items-center", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "flex items-center", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react28.Link, { to: "/", className: "text-2xl font-bold", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Rugged" }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "flex items-center", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react29.Link, { to: "/", className: "text-2xl font-bold", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Rugged" }) }) }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("nav", { className: "hidden md:flex space-x-6 mx-4", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react28.Link, { to: "/", className: `text-gray-300 hover:text-purple-400 transition-colors ${isHome ? "text-purple-400" : ""}`, children: "Home" }),
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react28.Link, { to: "/collections/trending", className: "text-gray-300 hover:text-purple-400 transition-colors", children: "Trending" }),
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react28.Link, { to: "/collections", className: "text-gray-300 hover:text-purple-400 transition-colors", children: "Categories" })
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react29.Link, { to: "/", className: `text-gray-300 hover:text-purple-400 transition-colors ${isHome ? "text-purple-400" : ""}`, children: "Home" }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react29.Link, { to: "/collections/trending", className: "text-gray-300 hover:text-purple-400 transition-colors", children: "Trending" }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react29.Link, { to: "/collections", className: "text-gray-300 hover:text-purple-400 transition-colors", children: "Categories" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center space-x-4", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react28.Link, { to: "/account", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react29.Link, { to: "/account", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
           motion.button,
           {
             className: `bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full text-sm
@@ -5055,20 +5172,97 @@ function Header() {
     ] }) }),
     !isProductPage && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "pt-3 pb-2 border-b border-[#2c2c44] bg-[#0a0a10]/90 backdrop-blur-sm", children: [
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SalesTicker, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "mt-3 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react28.Link, { to: "/products/create-your-own", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 transition-all cursor-pointer neon-text", children: "Create a Shirt" }) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "max-w-md mx-auto mt-3 px-4", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "relative", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-          "input",
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "mt-3 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react29.Link, { to: "/products/create-your-own", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 transition-all cursor-pointer neon-text", children: "Create a Shirt" }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "max-w-md mx-auto mt-3 px-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+          motion.div,
           {
-            type: "text",
-            placeholder: "Search shirts...",
-            className: `w-full bg-[#1c1c2e] text-white rounded-full px-4 py-2 
-                      focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50
-                      border border-[#2c2c44] transition-all`
+            className: "relative",
+            whileHover: { scale: 1.02 },
+            whileTap: { scale: 0.98 },
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                motion.input,
+                {
+                  type: "text",
+                  placeholder: "Search trending shirts...",
+                  className: `w-full bg-[#1c1c2e] text-white rounded-full px-4 py-2 pl-10
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75
+                       border border-blue-500/30 transition-all shadow-[0_0_15px_rgba(59,130,246,0.2)]`,
+                  whileFocus: {
+                    boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)",
+                    borderColor: "rgba(59, 130, 246, 0.8)"
+                  },
+                  transition: { duration: 0.2 }
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                motion.div,
+                {
+                  className: "absolute left-3 top-2.5 text-blue-400",
+                  animate: {
+                    rotate: [0, 0, 0, -15, 15, 0, 0],
+                    scale: [1, 1, 1, 1.1, 1.1, 1, 1]
+                  },
+                  transition: {
+                    duration: 5,
+                    repeat: 1 / 0,
+                    times: [0, 0.8, 0.83, 0.86, 0.89, 0.92, 1]
+                  },
+                  children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("path", { fillRule: "evenodd", d: "M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z", clipRule: "evenodd" }) })
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "absolute right-1 top-1", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                motion.button,
+                {
+                  className: "bg-blue-600 hover:bg-blue-700 text-white rounded-full h-7 w-7 flex items-center justify-center",
+                  whileHover: { scale: 1.1, boxShadow: "0 0 8px rgba(59, 130, 246, 0.6)" },
+                  whileTap: { scale: 0.9 },
+                  children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-4 w-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M5 13l4 4L19 7" }) })
+                }
+              ) })
+            ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "absolute right-3 top-2.5 text-gray-400", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("path", { fillRule: "evenodd", d: "M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z", clipRule: "evenodd" }) }) })
-      ] }) })
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex mt-2 overflow-x-auto pb-2 justify-center space-x-2 text-xs", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            motion.span,
+            {
+              className: "px-2 py-1 rounded-full text-purple-300 bg-purple-900/20 border border-purple-500/20 whitespace-nowrap cursor-pointer",
+              whileHover: { scale: 1.05, boxShadow: "0 0 5px rgba(168, 85, 247, 0.5)" },
+              whileTap: { scale: 0.95 },
+              children: "#PEPE"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            motion.span,
+            {
+              className: "px-2 py-1 rounded-full text-green-300 bg-green-900/20 border border-green-500/20 whitespace-nowrap cursor-pointer",
+              whileHover: { scale: 1.05, boxShadow: "0 0 5px rgba(34, 197, 94, 0.5)" },
+              whileTap: { scale: 0.95 },
+              children: "#PUMP"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            motion.span,
+            {
+              className: "px-2 py-1 rounded-full text-blue-300 bg-blue-900/20 border border-blue-500/20 whitespace-nowrap cursor-pointer",
+              whileHover: { scale: 1.05, boxShadow: "0 0 5px rgba(59, 130, 246, 0.5)" },
+              whileTap: { scale: 0.95 },
+              children: "#WAGMI"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            motion.span,
+            {
+              className: "px-2 py-1 rounded-full text-pink-300 bg-pink-900/20 border border-pink-500/20 whitespace-nowrap cursor-pointer",
+              whileHover: { scale: 1.05, boxShadow: "0 0 5px rgba(236, 72, 153, 0.5)" },
+              whileTap: { scale: 0.95 },
+              children: "#MOON"
+            }
+          )
+        ] })
+      ] })
     ] }),
     !isProductPage && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(TopTicker, {}),
     isMobileMenuOpen && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
@@ -5080,7 +5274,7 @@ function Header() {
         transition: { duration: 0.3 },
         children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "px-4 py-3 space-y-2", children: [
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-            import_react28.Link,
+            import_react29.Link,
             {
               to: "/",
               className: "block text-gray-300 hover:text-purple-400 transition-colors py-2",
@@ -5089,7 +5283,7 @@ function Header() {
             }
           ),
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-            import_react28.Link,
+            import_react29.Link,
             {
               to: "/collections/trending",
               className: "block text-gray-300 hover:text-purple-400 transition-colors py-2",
@@ -5098,7 +5292,7 @@ function Header() {
             }
           ),
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-            import_react28.Link,
+            import_react29.Link,
             {
               to: "/collections",
               className: "block text-gray-300 hover:text-purple-400 transition-colors py-2",
@@ -5107,7 +5301,7 @@ function Header() {
             }
           ),
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-            import_react28.Link,
+            import_react29.Link,
             {
               to: "/account",
               className: "block text-gray-300 hover:text-purple-400 transition-colors py-2",
@@ -5122,7 +5316,7 @@ function Header() {
 }
 
 // app/components/Footer.tsx
-var import_react29 = require("@remix-run/react"), import_jsx_runtime5 = require("react/jsx-runtime");
+var import_react30 = require("@remix-run/react"), import_jsx_runtime5 = require("react/jsx-runtime");
 function Footer() {
   let currentYear = (/* @__PURE__ */ new Date()).getFullYear();
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("footer", { className: "bg-[#0a0a10] text-white py-8 mt-12 border-t border-[#2c2c44]", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "container mx-auto px-4", children: [
@@ -5135,7 +5329,7 @@ function Footer() {
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("a", { href: "https://twitter.com/rugged", className: "hover:text-purple-400 transition-colors", children: "Twitter" }),
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("a", { href: "https://discord.gg/rugged", className: "hover:text-purple-400 transition-colors", children: "Discord" }),
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("a", { href: "https://instagram.com/rugged", className: "hover:text-purple-400 transition-colors", children: "Instagram" }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react29.Link, { to: "/policies/faq", className: "hover:text-purple-400 transition-colors", children: "FAQ" })
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react30.Link, { to: "/policies/faq", className: "hover:text-purple-400 transition-colors", children: "FAQ" })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mt-8 pt-8 border-t border-[#2c2c44] text-center text-gray-400 text-sm", children: [
@@ -5145,16 +5339,16 @@ function Footer() {
         " T-Shirt Pump. All rights reserved."
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mt-2 space-x-4", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react29.Link, { to: "/policies/privacy-policy", className: "hover:text-purple-400 transition-colors", children: "Privacy Policy" }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react29.Link, { to: "/policies/terms-of-service", className: "hover:text-purple-400 transition-colors", children: "Terms of Service" }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react29.Link, { to: "/policies/shipping-policy", className: "hover:text-purple-400 transition-colors", children: "Shipping Policy" })
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react30.Link, { to: "/policies/privacy-policy", className: "hover:text-purple-400 transition-colors", children: "Privacy Policy" }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react30.Link, { to: "/policies/terms-of-service", className: "hover:text-purple-400 transition-colors", children: "Terms of Service" }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react30.Link, { to: "/policies/shipping-policy", className: "hover:text-purple-400 transition-colors", children: "Shipping Policy" })
       ] })
     ] })
   ] }) });
 }
 
 // app/components/Cart.tsx
-var import_react30 = require("react"), import_react31 = require("@remix-run/react"), import_jsx_runtime6 = require("react/jsx-runtime"), mockCart = {
+var import_react31 = require("react"), import_react32 = require("@remix-run/react"), import_jsx_runtime6 = require("react/jsx-runtime"), mockCart = {
   linesCount: 0,
   isEmpty: !0,
   totalAmount: "0.00",
@@ -5164,7 +5358,7 @@ function Cart() {
   return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(CartContent, {});
 }
 function CartContent() {
-  let [cart] = (0, import_react30.useState)(mockCart), [isCartOpen, setIsCartOpen] = (0, import_react30.useState)(!1);
+  let [cart] = (0, import_react31.useState)(mockCart), [isCartOpen, setIsCartOpen] = (0, import_react31.useState)(!1);
   return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "fixed right-4 top-4 z-50", children: [
     /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
       "button",
@@ -5206,7 +5400,7 @@ function CartContent() {
               /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "p-4 text-center", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "mb-3", children: "Your cart is empty" }),
                 /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
-                  import_react31.Link,
+                  import_react32.Link,
                   {
                     to: "/collections/all",
                     className: "bg-purple-600 text-white px-4 py-2 rounded-full inline-block",
@@ -5222,15 +5416,91 @@ function CartContent() {
   ] });
 }
 
+// app/components/Sidebar.tsx
+var import_react33 = require("react"), import_react34 = require("@remix-run/react");
+var import_jsx_runtime7 = require("react/jsx-runtime"), categories = [
+  { name: "Pumping", handle: "pumping", color: "from-red-500 to-red-600" },
+  { name: "Rugged", handle: "rugged", color: "from-orange-500 to-orange-600" },
+  { name: "Resurrected", handle: "resurrected", color: "from-yellow-500 to-yellow-600" },
+  { name: "Trending", handle: "trending", color: "from-green-500 to-green-600" },
+  { name: "Popular", handle: "popular", color: "from-blue-500 to-blue-600" },
+  { name: "Meme", handle: "meme", color: "from-indigo-500 to-indigo-600" },
+  { name: "Living", handle: "living", color: "from-violet-500 to-violet-600" }
+];
+function Sidebar() {
+  let location = (0, import_react34.useLocation)(), [hoveredIndex, setHoveredIndex] = (0, import_react33.useState)(null), getItemSize = (index) => {
+    let middle = Math.floor(categories.length / 2), distanceFromMiddle = Math.abs(index - middle), maxDistance = Math.max(middle, categories.length - middle - 1);
+    return `${100 - distanceFromMiddle / maxDistance * 30}%`;
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "fixed left-0 top-0 bottom-0 w-48 bg-[#0f0f13] border-r border-[#2c2c44] pt-20 hidden lg:block z-40", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "flex flex-col items-center justify-center h-full space-y-2 py-6", children: categories.map((category, index) => {
+    let isActive = location.pathname === `/collections/${category.handle}`, size = getItemSize(index);
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      motion.div,
+      {
+        className: "w-full px-4",
+        style: { width: size },
+        onMouseEnter: () => setHoveredIndex(index),
+        onMouseLeave: () => setHoveredIndex(null),
+        children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react34.Link, { to: `/collections/${category.handle}`, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+          motion.div,
+          {
+            className: `bg-gradient-to-r ${category.color} py-3 px-4 rounded-lg text-white text-center
+                           border border-white/10 relative overflow-hidden`,
+            whileHover: {
+              scale: 1.05,
+              boxShadow: "0 0 15px rgba(255,255,255,0.3)"
+            },
+            animate: {
+              boxShadow: hoveredIndex === index ? ["0 0 5px rgba(255,255,255,0.3)", "0 0 20px rgba(255,255,255,0.5)", "0 0 5px rgba(255,255,255,0.3)"] : "0 0 0px rgba(255,255,255,0)"
+            },
+            transition: {
+              boxShadow: {
+                duration: 1.5,
+                repeat: 1 / 0,
+                repeatType: "loop"
+              }
+            },
+            children: [
+              hoveredIndex === index && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+                motion.div,
+                {
+                  className: "absolute inset-0 bg-white/10",
+                  initial: { opacity: 0 },
+                  animate: { opacity: [0.1, 0.3, 0.1] },
+                  transition: { duration: 1.5, repeat: 1 / 0 }
+                }
+              ),
+              isActive && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+                motion.div,
+                {
+                  className: "absolute right-1 top-1 w-2 h-2 rounded-full bg-white",
+                  animate: {
+                    scale: [1, 1.5, 1],
+                    opacity: [1, 0.6, 1]
+                  },
+                  transition: { duration: 1.5, repeat: 1 / 0 }
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "relative z-10 font-medium", children: category.name })
+            ]
+          }
+        ) })
+      },
+      category.handle
+    );
+  }) }) });
+}
+
 // app/components/Layout.tsx
-var import_react32 = require("react"), import_jsx_runtime7 = require("react/jsx-runtime");
+var import_react35 = require("react"), import_jsx_runtime8 = require("react/jsx-runtime");
 function Layout({ children }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_jsx_runtime7.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex flex-col min-h-screen", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("a", { href: "#mainContent", className: "sr-only", children: "Skip to content" }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Header, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("main", { role: "main", id: "mainContent", className: "flex-grow", children }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react32.Suspense, { fallback: null, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Cart, {}) }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Footer, {})
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_jsx_runtime8.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex flex-col min-h-screen", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("a", { href: "#mainContent", className: "sr-only", children: "Skip to content" }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Header, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Sidebar, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("main", { role: "main", id: "mainContent", className: "flex-grow lg:ml-48 transition-all duration-300", children }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react35.Suspense, { fallback: null, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Cart, {}) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Footer, {})
   ] }) });
 }
 
@@ -5238,10 +5508,10 @@ function Layout({ children }) {
 var app_default = "/build/_assets/app-UI7E6XDX.css";
 
 // app/styles/tailwind.css
-var tailwind_default = "/build/_assets/tailwind-B5BOYNBG.css";
+var tailwind_default = "/build/_assets/tailwind-MXBY6LM4.css";
 
 // app/root.tsx
-var import_jsx_runtime8 = require("react/jsx-runtime");
+var import_jsx_runtime9 = require("react/jsx-runtime");
 function links() {
   return [
     { rel: "stylesheet", href: tailwind_default },
@@ -5252,39 +5522,39 @@ var loader = async () => (0, import_node2.json)({
   publicStoreDomain: "mockshop.myshopify.com"
 });
 function App() {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("html", { lang: "en", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("head", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meta", { charSet: "utf-8" }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meta", { name: "viewport", content: "width=device-width,initial-scale=1" }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meta", { name: "theme-color", content: "#0f0f13" }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("link", { rel: "icon", href: "/favicon.ico" }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react33.Meta, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react33.Links, {})
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("html", { lang: "en", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("head", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("meta", { charSet: "utf-8" }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("meta", { name: "viewport", content: "width=device-width,initial-scale=1" }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("meta", { name: "theme-color", content: "#0f0f13" }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("link", { rel: "icon", href: "/favicon.ico" }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react36.Meta, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react36.Links, {})
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("body", { className: "min-h-screen bg-gradient-to-b from-[#0f0f13] to-[#1a1a27] text-white", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Layout, { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react33.Outlet, {}) }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react33.ScrollRestoration, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react33.Scripts, {})
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("body", { className: "min-h-screen bg-gradient-to-b from-[#0f0f13] to-[#1a1a27] text-white", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Layout, { children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react36.Outlet, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react36.ScrollRestoration, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react36.Scripts, {})
     ] })
   ] });
 }
 function ErrorBoundary() {
   var _a;
-  let error = (0, import_react33.useRouteError)(), errorMessage = "Unknown error", errorStatus = 500;
-  return (0, import_react33.isRouteErrorResponse)(error) ? (errorMessage = ((_a = error.data) == null ? void 0 : _a.message) || error.data.toString(), errorStatus = error.status) : error instanceof Error && (errorMessage = error.message), /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("html", { lang: "en", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("head", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meta", { charSet: "utf-8" }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meta", { name: "viewport", content: "width=device-width,initial-scale=1" }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meta", { name: "theme-color", content: "#0f0f13" }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react33.Meta, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react33.Links, {})
+  let error = (0, import_react36.useRouteError)(), errorMessage = "Unknown error", errorStatus = 500;
+  return (0, import_react36.isRouteErrorResponse)(error) ? (errorMessage = ((_a = error.data) == null ? void 0 : _a.message) || error.data.toString(), errorStatus = error.status) : error instanceof Error && (errorMessage = error.message), /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("html", { lang: "en", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("head", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("meta", { charSet: "utf-8" }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("meta", { name: "viewport", content: "width=device-width,initial-scale=1" }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("meta", { name: "theme-color", content: "#0f0f13" }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react36.Meta, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react36.Links, {})
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("body", { className: "min-h-screen bg-gradient-to-b from-[#0f0f13] to-[#1a1a27] text-white", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "container mx-auto py-16 px-4 text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h1", { className: "text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: errorStatus }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h2", { className: "text-3xl font-bold mb-4", children: "Something went wrong" }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "text-gray-400 mb-8 text-lg", children: errorMessage }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("body", { className: "min-h-screen bg-gradient-to-b from-[#0f0f13] to-[#1a1a27] text-white", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "container mx-auto py-16 px-4 text-center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h1", { className: "text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: errorStatus }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h2", { className: "text-3xl font-bold mb-4", children: "Something went wrong" }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-gray-400 mb-8 text-lg", children: errorMessage }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
           "a",
           {
             href: "/",
@@ -5293,7 +5563,7 @@ function ErrorBoundary() {
           }
         )
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react33.Scripts, {})
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react36.Scripts, {})
     ] })
   ] });
 }
@@ -5304,8 +5574,8 @@ __export(collections_handle_exports, {
   default: () => CollectionPage,
   loader: () => loader2
 });
-var import_react34 = require("@remix-run/react"), import_node3 = require("@remix-run/node"), import_react35 = require("@remix-run/react");
-var import_jsx_runtime9 = require("react/jsx-runtime"), mockCollections = {
+var import_react37 = require("@remix-run/react"), import_node3 = require("@remix-run/node"), import_react38 = require("@remix-run/react");
+var import_jsx_runtime10 = require("react/jsx-runtime"), mockCollections = {
   pumping: {
     id: "col1",
     title: "Pumping",
@@ -5459,22 +5729,22 @@ async function loader2({ params }) {
   });
 }
 function CollectionPage() {
-  let { collection } = (0, import_react34.useLoaderData)(), colorClass = {
+  let { collection } = (0, import_react37.useLoaderData)(), colorClass = {
     pumping: "from-green-500 to-green-700",
     rugged: "from-red-500 to-red-700",
     "new-drops": "from-blue-500 to-blue-700",
     classics: "from-yellow-500 to-yellow-700",
     trending: "from-purple-500 to-purple-700"
   }[collection.handle] || "from-purple-500 to-purple-700";
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "container mx-auto py-8 px-4", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "container mx-auto py-8 px-4", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
     motion.div,
     {
       initial: { opacity: 0, y: -10 },
       animate: { opacity: 1, y: 0 },
       transition: { duration: 0.5 },
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: `bg-gradient-to-br ${colorClass} rounded-xl p-8 mb-10 relative overflow-hidden`, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: `bg-gradient-to-br ${colorClass} rounded-xl p-8 mb-10 relative overflow-hidden`, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
             motion.div,
             {
               className: "absolute inset-0 bg-white/5",
@@ -5492,22 +5762,22 @@ function CollectionPage() {
               }
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "relative z-10", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h1", { className: "text-3xl font-bold text-white mb-3", children: collection.title }),
-            collection.description && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "relative z-10", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h1", { className: "text-3xl font-bold text-white mb-3", children: collection.title }),
+            collection.description && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
               "div",
               {
                 dangerouslySetInnerHTML: { __html: collection.description },
                 className: "text-white/80 max-w-3xl"
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "flex items-center mt-4", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "bg-white/20 px-3 py-1 rounded-full text-sm text-white", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "flex items-center mt-4", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { className: "bg-white/20 px-3 py-1 rounded-full text-sm text-white", children: [
               collection.products.nodes.length,
               " shirts"
             ] }) })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6", children: collection.products.nodes.map((product, index) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6", children: collection.products.nodes.map((product, index) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           motion.div,
           {
             className: "bg-[#151522] rounded-xl overflow-hidden border border-[#2c2c44] card-glow",
@@ -5515,9 +5785,9 @@ function CollectionPage() {
             initial: { opacity: 0, y: 20 },
             animate: { opacity: 1, y: 0 },
             transition: { duration: 0.3, delay: index * 0.05 },
-            children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(import_react35.Link, { to: `/products/${product.handle}`, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "relative", children: [
-                product.images.nodes[0] && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+            children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(import_react38.Link, { to: `/products/${product.handle}`, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "relative", children: [
+                product.images.nodes[0] && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
                   "img",
                   {
                     src: product.images.nodes[0].url,
@@ -5527,27 +5797,27 @@ function CollectionPage() {
                     height: product.images.nodes[0].height
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold", children: "+120%" })
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold", children: "+120%" })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-4", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { className: "font-bold", children: product.title }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex justify-between items-center mt-2", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("p", { className: "text-purple-400 font-medium", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "p-4", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h3", { className: "font-bold", children: product.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "flex justify-between items-center mt-2", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("p", { className: "text-purple-400 font-medium", children: [
                     "$",
                     product.priceRange.minVariantPrice.amount
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "text-xs text-gray-400", children: "897 sales" })
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "text-xs text-gray-400", children: "897 sales" })
                 ] })
               ] })
             ] })
           },
           product.id
         )) }),
-        collection.products.nodes.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "text-center py-12", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h2", { className: "text-2xl font-bold mb-4", children: "No products found" }),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-gray-400 mb-6", children: "We couldn't find any products in this collection." }),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
-            import_react35.Link,
+        collection.products.nodes.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "text-center py-12", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h2", { className: "text-2xl font-bold mb-4", children: "No products found" }),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-gray-400 mb-6", children: "We couldn't find any products in this collection." }),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+            import_react38.Link,
             {
               to: "/collections",
               className: "bg-purple-600 text-white px-6 py-3 rounded-full inline-block",
@@ -5566,8 +5836,8 @@ __export(collections_index_exports, {
   default: () => CollectionsPage,
   loader: () => loader3
 });
-var import_react36 = require("@remix-run/react"), import_node4 = require("@remix-run/node"), import_react37 = require("@remix-run/react");
-var import_jsx_runtime10 = require("react/jsx-runtime"), mockCollections2 = {
+var import_react39 = require("@remix-run/react"), import_node4 = require("@remix-run/node"), import_react40 = require("@remix-run/react");
+var import_jsx_runtime11 = require("react/jsx-runtime"), mockCollections2 = {
   nodes: [
     {
       id: "col1",
@@ -5622,24 +5892,24 @@ async function loader3() {
   });
 }
 function CollectionsPage() {
-  let { collections } = (0, import_react36.useLoaderData)(), categoryColors = {
+  let { collections } = (0, import_react39.useLoaderData)(), categoryColors = {
     pumping: "from-green-500 to-green-700",
     rugged: "from-red-500 to-red-700",
     "new-drops": "from-blue-500 to-blue-700",
     classics: "from-yellow-500 to-yellow-700",
     trending: "from-purple-500 to-purple-700"
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "container mx-auto py-8 px-4", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "container mx-auto py-8 px-4", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
     motion.div,
     {
       initial: { opacity: 0, y: -10 },
       animate: { opacity: 1, y: 0 },
       transition: { duration: 0.5 },
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h1", { className: "text-3xl font-bold mb-8 neon-text bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500", children: "T-Shirt Categories" }),
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: collections.nodes.map((collection, index) => {
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h1", { className: "text-3xl font-bold mb-8 neon-text bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500", children: "T-Shirt Categories" }),
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: collections.nodes.map((collection, index) => {
           let colorClass = categoryColors[collection.handle] || "from-purple-500 to-purple-700";
-          return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+          return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
             motion.div,
             {
               className: `bg-gradient-to-br ${colorClass} p-8 rounded-xl text-white relative overflow-hidden
@@ -5654,8 +5924,8 @@ function CollectionsPage() {
               animate: { opacity: 1, y: 0 },
               transition: { duration: 0.3, delay: index * 0.1 },
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_react37.Link, { to: `/collections/${collection.handle}`, className: "absolute inset-0 z-10", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "sr-only", children: collection.title }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_react40.Link, { to: `/collections/${collection.handle}`, className: "absolute inset-0 z-10", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "sr-only", children: collection.title }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
                   motion.div,
                   {
                     className: "absolute inset-0 bg-white/5",
@@ -5673,7 +5943,7 @@ function CollectionsPage() {
                     }
                   }
                 ),
-                Array.from({ length: 6 }).map((_, i) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+                Array.from({ length: 6 }).map((_, i) => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
                   motion.div,
                   {
                     className: "absolute w-1 h-1 rounded-full bg-white/70",
@@ -5695,18 +5965,18 @@ function CollectionsPage() {
                   },
                   i
                 )),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h2", { className: "text-2xl font-bold relative z-2", children: collection.title }),
-                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-white/80 mt-2 relative z-2", children: collection.description ? collection.description.substring(0, 120) + "..." : "Explore our collection of trending t-shirts" })
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h2", { className: "text-2xl font-bold relative z-2", children: collection.title }),
+                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-white/80 mt-2 relative z-2", children: collection.description ? collection.description.substring(0, 120) + "..." : "Explore our collection of trending t-shirts" })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "flex items-center justify-between relative z-2", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { className: "text-sm bg-white/20 px-3 py-1 rounded-full", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex items-center justify-between relative z-2", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { className: "text-sm bg-white/20 px-3 py-1 rounded-full", children: [
                     collection.products.totalCount,
                     " shirts"
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { className: "text-sm font-medium flex items-center", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { className: "text-sm font-medium flex items-center", children: [
                     "Explore",
-                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("svg", { className: "w-4 h-4 ml-1", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M14 5l7 7m0 0l-7 7m7-7H3" }) })
+                    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("svg", { className: "w-4 h-4 ml-1", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M14 5l7 7m0 0l-7 7m7-7H3" }) })
                   ] })
                 ] })
               ]
@@ -5714,9 +5984,9 @@ function CollectionsPage() {
             collection.id
           );
         }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "mt-16", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h2", { className: "text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Popular Tags" }),
-          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "bg-[#151522] p-6 rounded-xl border border-[#2c2c44]", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "flex flex-wrap gap-3", children: ["TRENDING", "POPULAR", "NEW", "LIMITED", "SALE", "EXCLUSIVE", "BEST SELLER", "CRYPTO", "PEPE", "MOON", "DEGEN", "WAGMI", "HODL", "APE", "BULL", "PUMP"].map((tag) => /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "mt-16", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h2", { className: "text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Popular Tags" }),
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "bg-[#151522] p-6 rounded-xl border border-[#2c2c44]", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "flex flex-wrap gap-3", children: ["TRENDING", "POPULAR", "NEW", "LIMITED", "SALE", "EXCLUSIVE", "BEST SELLER", "CRYPTO", "PEPE", "MOON", "DEGEN", "WAGMI", "HODL", "APE", "BULL", "PUMP"].map((tag) => /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
             motion.a,
             {
               href: `/search?q=${tag}`,
@@ -5745,8 +6015,8 @@ __export(products_handle_exports, {
   default: () => ProductPage,
   loader: () => loader4
 });
-var import_node5 = require("@remix-run/node"), import_react38 = require("@remix-run/react");
-var import_jsx_runtime11 = require("react/jsx-runtime"), mockProducts = {
+var import_node5 = require("@remix-run/node"), import_react41 = require("@remix-run/react");
+var import_jsx_runtime12 = require("react/jsx-runtime"), mockProducts = {
   1: {
     id: "1",
     title: "PEPE PUMP",
@@ -5961,7 +6231,7 @@ var import_jsx_runtime11 = require("react/jsx-runtime"), mockProducts = {
 };
 function ProductPage() {
   var _a, _b, _c, _d, _e, _f;
-  let { product, relatedProducts } = (0, import_react38.useLoaderData)(), selectedVariant = product.variants.nodes[0], stats = {
+  let { product, relatedProducts } = (0, import_react41.useLoaderData)(), selectedVariant = product.variants.nodes[0], stats = {
     totalSales: ((_a = product.metafields.find((m) => m.key === "total_sales")) == null ? void 0 : _a.value) || "897",
     lastPurchase: "2 minutes ago",
     holders: ((_b = product.metafields.find((m) => m.key === "holders")) == null ? void 0 : _b.value) || "854"
@@ -5970,16 +6240,16 @@ function ProductPage() {
     address: ((_e = product.metafields.find((m) => m.key === "creator_address")) == null ? void 0 : _e.value) || "designer...x723",
     share: ((_f = product.metafields.find((m) => m.key === "creator_share")) == null ? void 0 : _f.value) || "10"
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "container mx-auto px-4 py-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-12", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "container mx-auto px-4 py-8", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-12", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
         motion.div,
         {
           initial: { opacity: 0, x: -20 },
           animate: { opacity: 1, x: 0 },
           transition: { duration: 0.5 },
           children: [
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-xl shadow-lg", children: product.images.nodes[0] && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-xl shadow-lg", children: product.images.nodes[0] && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
               "img",
               {
                 src: product.images.nodes[0].url,
@@ -5987,17 +6257,17 @@ function ProductPage() {
                 className: "w-full h-auto rounded-lg"
               }
             ) }),
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "mt-8 bg-white p-6 rounded-xl shadow-md", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h3", { className: "text-xl font-bold mb-4", children: "Creator Info" }),
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex items-center justify-between", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-sm text-gray-500", children: "Created by" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "font-medium", children: creator.name }),
-                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-xs text-gray-400", children: creator.address })
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-8 bg-white p-6 rounded-xl shadow-md", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h3", { className: "text-xl font-bold mb-4", children: "Creator Info" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex items-center justify-between", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-sm text-gray-500", children: "Created by" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "font-medium", children: creator.name }),
+                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-xs text-gray-400", children: creator.address })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-sm text-gray-500", children: "Royalty" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("p", { className: "font-medium text-purple-600", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-sm text-gray-500", children: "Royalty" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("p", { className: "font-medium text-purple-600", children: [
                     creator.share,
                     "%"
                   ] })
@@ -6007,17 +6277,17 @@ function ProductPage() {
           ]
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
         motion.div,
         {
           initial: { opacity: 0, x: 20 },
           animate: { opacity: 1, x: 0 },
           transition: { duration: 0.5, delay: 0.2 },
           children: [
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex justify-between items-start", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h1", { className: "text-3xl font-bold", children: product.title }),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex justify-between items-start", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h1", { className: "text-3xl font-bold", children: product.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                   "div",
                   {
                     dangerouslySetInnerHTML: { __html: product.descriptionHtml },
@@ -6025,24 +6295,24 @@ function ProductPage() {
                   }
                 )
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "bg-green-500 text-white px-4 py-2 rounded-lg text-center", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("p", { className: "text-xl font-bold", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-green-500 text-white px-4 py-2 rounded-lg text-center", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("p", { className: "text-xl font-bold", children: [
                   "+",
                   growth,
                   "%"
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-xs", children: "24h" })
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-xs", children: "24h" })
               ] })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "mt-8", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { className: "text-3xl font-bold", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-8", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", { className: "text-3xl font-bold", children: [
                 "$",
                 selectedVariant.price.amount,
                 " ",
                 selectedVariant.price.currencyCode
               ] }) }),
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "mt-10 space-y-4", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-10 space-y-4", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                   "button",
                   {
                     className: "flex items-center justify-center bg-[#5A31F4] text-white w-full py-3 rounded-full",
@@ -6051,7 +6321,7 @@ function ProductPage() {
                     children: "Check out with Shop Pay"
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                   "button",
                   {
                     className: "w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg",
@@ -6062,25 +6332,25 @@ function ProductPage() {
                 )
               ] })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "mt-10 grid grid-cols-3 gap-4 text-center", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "bg-gray-50 p-4 rounded-lg", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-gray-500 text-sm", children: "Total Sales" }),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "font-bold text-xl", children: stats.totalSales })
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-10 grid grid-cols-3 gap-4 text-center", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-gray-50 p-4 rounded-lg", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-gray-500 text-sm", children: "Total Sales" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "font-bold text-xl", children: stats.totalSales })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "bg-gray-50 p-4 rounded-lg", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-gray-500 text-sm", children: "Last Purchase" }),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "font-bold text-lg", children: stats.lastPurchase })
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-gray-50 p-4 rounded-lg", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-gray-500 text-sm", children: "Last Purchase" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "font-bold text-lg", children: stats.lastPurchase })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "bg-gray-50 p-4 rounded-lg", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-gray-500 text-sm", children: "Holders" }),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "font-bold text-xl", children: stats.holders })
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-gray-50 p-4 rounded-lg", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-gray-500 text-sm", children: "Holders" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "font-bold text-xl", children: stats.holders })
               ] })
             ] })
           ]
         }
       )
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
       motion.div,
       {
         className: "mt-16",
@@ -6088,16 +6358,16 @@ function ProductPage() {
         animate: { opacity: 1, y: 0 },
         transition: { duration: 0.5, delay: 0.4 },
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h2", { className: "text-2xl font-bold mb-6", children: "Similar T-Shirts" }),
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6", children: relatedProducts.nodes.map((similar) => {
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h2", { className: "text-2xl font-bold mb-6", children: "Similar T-Shirts" }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6", children: relatedProducts.nodes.map((similar) => {
             var _a2;
-            return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+            return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
               motion.div,
               {
                 className: "bg-white rounded-xl shadow-md overflow-hidden",
                 whileHover: { y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" },
                 children: [
-                  similar.images.nodes[0] && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+                  similar.images.nodes[0] && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                     "img",
                     {
                       src: similar.images.nodes[0].url,
@@ -6105,23 +6375,23 @@ function ProductPage() {
                       className: "w-full h-48 object-cover"
                     }
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "p-4", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex justify-between items-start", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h3", { className: "font-bold", children: similar.title }),
-                      /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { className: "bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "p-4", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex justify-between items-start", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h3", { className: "font-bold", children: similar.title }),
+                      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", { className: "bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full", children: [
                         "+",
                         ((_a2 = similar.metafields.find((m) => m.key === "growth")) == null ? void 0 : _a2.value) || "120",
                         "%"
                       ] })
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("p", { className: "mt-2 text-purple-600 font-medium", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("p", { className: "mt-2 text-purple-600 font-medium", children: [
                       "$",
                       similar.variants.nodes[0].price.amount,
                       " ",
                       similar.variants.nodes[0].price.currencyCode
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-                      import_react38.Link,
+                    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+                      import_react41.Link,
                       {
                         to: `/products/${similar.handle}`,
                         className: "mt-3 w-full bg-purple-100 text-purple-600 py-2 px-4 rounded-lg font-medium hover:bg-purple-200 transition-colors inline-block text-center",
@@ -6146,8 +6416,246 @@ __export(index_exports, {
   default: () => Index,
   loader: () => loader5
 });
-var import_node6 = require("@remix-run/node"), import_react39 = require("@remix-run/react"), import_react40 = require("@remix-run/react");
-var import_jsx_runtime12 = require("react/jsx-runtime"), mockProducts2 = {
+var import_node6 = require("@remix-run/node"), import_react44 = require("@remix-run/react"), import_react45 = require("@remix-run/react");
+
+// app/components/ShirtCarousel.tsx
+var import_react42 = require("react");
+var import_react43 = require("@remix-run/react"), import_jsx_runtime13 = require("react/jsx-runtime"), featuredShirts = [
+  {
+    id: "1",
+    title: "PEPE PUMP",
+    handle: "pepe-pump",
+    image: "https://placehold.co/800x400/22c55e/ffffff?text=PEPE+PUMP",
+    growth: "+240%",
+    price: "$35.99",
+    creator: "PepeLord"
+  },
+  {
+    id: "2",
+    title: "MOON SOON",
+    handle: "moon-soon",
+    image: "https://placehold.co/800x400/8b5cf6/ffffff?text=MOON+SOON",
+    growth: "+178%",
+    price: "$29.99",
+    creator: "MoonMan"
+  },
+  {
+    id: "3",
+    title: "DEGEN SZN",
+    handle: "degen-szn",
+    image: "https://placehold.co/800x400/ec4899/ffffff?text=DEGEN+SZN",
+    growth: "+120%",
+    price: "$32.99",
+    creator: "DegenKing"
+  },
+  {
+    id: "4",
+    title: "WAGMI",
+    handle: "wagmi",
+    image: "https://placehold.co/800x400/3b82f6/ffffff?text=WAGMI",
+    growth: "+95%",
+    price: "$27.99",
+    creator: "DiamondHands"
+  }
+];
+function ShirtCarousel() {
+  let [currentIndex, setCurrentIndex] = (0, import_react42.useState)(0), [direction, setDirection] = (0, import_react42.useState)(0), currentShirt = featuredShirts[currentIndex];
+  (0, import_react42.useEffect)(() => {
+    let interval = setInterval(() => {
+      setDirection(1), setCurrentIndex((prevIndex) => (prevIndex + 1) % featuredShirts.length);
+    }, 5e3);
+    return () => clearInterval(interval);
+  }, []);
+  let handlePrev = () => {
+    setDirection(-1), setCurrentIndex(
+      (prevIndex) => prevIndex === 0 ? featuredShirts.length - 1 : prevIndex - 1
+    );
+  }, handleNext = () => {
+    setDirection(1), setCurrentIndex(
+      (prevIndex) => (prevIndex + 1) % featuredShirts.length
+    );
+  }, variants = {
+    enter: (direction2) => ({
+      x: direction2 > 0 ? 1e3 : -1e3,
+      opacity: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction2) => ({
+      x: direction2 < 0 ? 1e3 : -1e3,
+      opacity: 0
+    })
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "relative overflow-hidden rounded-xl w-full h-[400px] bg-[#151522] border border-[#2c2c44]", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(AnimatePresence, { initial: !1, custom: direction, mode: "wait", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+      motion.div,
+      {
+        custom: direction,
+        variants,
+        initial: "enter",
+        animate: "center",
+        exit: "exit",
+        transition: {
+          x: { type: "spring", stiffness: 300, damping: 30 },
+          opacity: { duration: 0.2 }
+        },
+        className: "absolute inset-0 flex items-center justify-center",
+        children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "relative w-full h-full flex flex-col md:flex-row overflow-hidden", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "md:w-7/12 h-48 md:h-full relative overflow-hidden", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_react43.Link, { to: `/products/${currentShirt.handle}`, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+              "img",
+              {
+                src: currentShirt.image,
+                alt: currentShirt.title,
+                className: "w-full h-full object-cover"
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: `absolute top-4 right-4 bg-green-600 text-white font-bold px-3 py-1.5 rounded-lg shadow-lg
+                              border border-green-400 flex items-center`, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+                motion.div,
+                {
+                  animate: { scale: [1, 1.2, 1] },
+                  transition: { duration: 1.5, repeat: 1 / 0 },
+                  className: "mr-1",
+                  children: "\u2191"
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+                motion.span,
+                {
+                  animate: { opacity: [0.8, 1, 0.8] },
+                  transition: { duration: 2, repeat: 1 / 0 },
+                  children: currentShirt.growth
+                }
+              )
+            ] })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "md:w-5/12 p-6 flex flex-col justify-center bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a]", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+              motion.h2,
+              {
+                className: "text-3xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-pink-300",
+                initial: { opacity: 0, x: 20 },
+                animate: { opacity: 1, x: 0 },
+                transition: { delay: 0.2, duration: 0.5 },
+                children: currentShirt.title
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
+              motion.div,
+              {
+                className: "text-sm text-gray-400 mb-4",
+                initial: { opacity: 0 },
+                animate: { opacity: 1 },
+                transition: { delay: 0.3, duration: 0.5 },
+                children: [
+                  "Created by ",
+                  /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "text-purple-400", children: currentShirt.creator })
+                ]
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+              motion.div,
+              {
+                className: "text-2xl font-bold mb-6 text-white",
+                initial: { opacity: 0, y: 10 },
+                animate: { opacity: 1, y: 0 },
+                transition: { delay: 0.4, duration: 0.5 },
+                children: currentShirt.price
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+              motion.div,
+              {
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+                transition: { delay: 0.5, duration: 0.5 },
+                children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(import_react43.Link, { to: `/products/${currentShirt.handle}`, children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+                  motion.button,
+                  {
+                    className: `bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-bold
+                              shadow-[0_0_15px_rgba(168,85,247,0.5)] w-full md:w-auto`,
+                    whileHover: {
+                      scale: 1.05,
+                      boxShadow: "0 0 25px rgba(168, 85, 247, 0.8)"
+                    },
+                    whileTap: { scale: 0.98 },
+                    children: "View Details"
+                  }
+                ) })
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
+              motion.div,
+              {
+                className: "mt-6 grid grid-cols-2 gap-3",
+                initial: { opacity: 0 },
+                animate: { opacity: 1 },
+                transition: { delay: 0.6, duration: 0.5 },
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "bg-[#1c1c2e]/50 p-3 rounded-lg", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "text-xs text-gray-400", children: "Trending" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "text-sm font-semibold text-green-400", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+                        motion.span,
+                        {
+                          animate: { y: [0, -3, 0] },
+                          transition: { duration: 2, repeat: 1 / 0 },
+                          className: "inline-block",
+                          children: "#1"
+                        }
+                      ),
+                      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { children: " this week" })
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "bg-[#1c1c2e]/50 p-3 rounded-lg", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "text-xs text-gray-400", children: "Sales" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "text-sm font-semibold text-white", children: "2,458 sold" })
+                  ] })
+                ]
+              }
+            )
+          ] })
+        ] })
+      },
+      currentShirt.id
+    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+      "button",
+      {
+        className: `absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white w-10 h-10 
+                  rounded-full flex items-center justify-center z-10 backdrop-blur-sm border border-white/10`,
+        onClick: handlePrev,
+        children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-6 w-6", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M15 19l-7-7 7-7" }) })
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+      "button",
+      {
+        className: `absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white w-10 h-10
+                  rounded-full flex items-center justify-center z-10 backdrop-blur-sm border border-white/10`,
+        onClick: handleNext,
+        children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-6 w-6", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9 5l7 7-7 7" }) })
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10", children: featuredShirts.map((_, index) => /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+      "button",
+      {
+        className: `w-2 h-2 rounded-full transition-all ${index === currentIndex ? "bg-white w-6" : "bg-white/30 hover:bg-white/50"}`,
+        onClick: () => {
+          setDirection(index > currentIndex ? 1 : -1), setCurrentIndex(index);
+        }
+      },
+      index
+    )) })
+  ] });
+}
+
+// app/routes/_index.tsx
+var import_jsx_runtime14 = require("react/jsx-runtime"), mockProducts2 = {
   nodes: [
     {
       id: "1",
@@ -6279,12 +6787,12 @@ var import_jsx_runtime12 = require("react/jsx-runtime"), mockProducts2 = {
   collections: mockCollections3
 });
 function Index() {
-  let { products, collections } = (0, import_react39.useLoaderData)(), categoryColors = {
+  let { products, collections } = (0, import_react44.useLoaderData)(), categoryColors = {
     pumping: "from-green-500 to-green-700",
     rugged: "from-red-500 to-red-700",
     "new-drops": "from-blue-500 to-blue-700",
     classics: "from-yellow-500 to-yellow-700"
-  }, categories = collections.nodes.map((collection) => ({
+  }, categories2 = collections.nodes.map((collection) => ({
     id: collection.id,
     handle: collection.handle,
     title: collection.title,
@@ -6296,7 +6804,7 @@ function Index() {
     creators: 843,
     topROI: "312%"
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
     motion.div,
     {
       className: "container mx-auto py-6 px-4",
@@ -6304,37 +6812,45 @@ function Index() {
       animate: { opacity: 1 },
       transition: { duration: 0.5 },
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("section", { className: "mb-12", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "bg-gradient-to-br from-[#151522] to-[#1c1c2e] p-8 rounded-xl border border-[#2c2c44] relative overflow-hidden", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex flex-col md:flex-row items-center", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "md:w-1/2 mb-6 md:mb-0", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h2", { className: "text-3xl font-bold text-white mb-4 neon-text", children: "T-Shirt Pump" }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-gray-300 mb-6", children: "The #1 marketplace for trending t-shirts with casino-like dynamics!" }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_react40.Link, { to: "/collections/trending", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
-              motion.button,
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("section", { className: "mb-12", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "bg-gradient-to-br from-[#151522] to-[#1c1c2e] p-4 md:p-6 rounded-xl border border-[#2c2c44] relative overflow-hidden", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "flex justify-between items-center mb-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h2", { className: "text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Featured Shirts" }),
+            /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react45.Link, { to: "/collections/trending", className: "text-pink-400 hover:text-pink-300 transition-colors", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
+              motion.div,
               {
-                className: "bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full shadow-lg",
-                whileHover: { scale: 1.05, boxShadow: "0 0 15px rgba(168,85,247,0.5)" },
-                whileTap: { scale: 0.98 },
-                children: "Explore Trending Shirts"
+                className: "flex items-center",
+                whileHover: { x: 3 },
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { children: "View All" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-4 w-4 ml-1", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9 5l7 7-7 7" }) })
+                ]
               }
             ) })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "md:w-1/2 flex justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "w-64 h-64 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xl font-bold", children: "Featured Shirt" }) })
-        ] }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-8", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "lg:col-span-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex justify-between items-center mb-6", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h2", { className: "text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Trending T-Shirts" }),
-                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_react40.Link, { to: "/collections/trending", className: "text-purple-400 hover:text-purple-300 transition-colors", children: "View All" })
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(ShirtCarousel, {})
+        ] }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-8", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "lg:col-span-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "flex justify-between items-center mb-6", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h2", { className: "text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Trending T-Shirts" }),
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react45.Link, { to: "/collections/trending", className: "text-purple-400 hover:text-purple-300 transition-colors", children: "View All" })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4", children: products.nodes.slice(0, 4).map((product) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4", children: products.nodes.slice(0, 4).map((product, index) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
                 motion.div,
                 {
-                  className: "bg-[#151522] rounded-xl overflow-hidden border border-[#2c2c44] card-glow",
-                  whileHover: { y: -5, boxShadow: "0 10px 25px rgba(0,0,0,0.3)" },
-                  children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(import_react40.Link, { to: `/products/${product.handle}`, children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "relative", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+                  className: "bg-[#151522] rounded-xl overflow-hidden border border-pink-500/20 card-glow",
+                  whileHover: {
+                    y: -5,
+                    boxShadow: "0 10px 25px rgba(236, 72, 153, 0.3)",
+                    borderColor: "rgba(236, 72, 153, 0.5)"
+                  },
+                  initial: { opacity: 0, scale: 0.9, y: 20 },
+                  animate: { opacity: 1, scale: 1, y: 0 },
+                  transition: { duration: 0.4, delay: index * 0.1 },
+                  children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_react45.Link, { to: `/products/${product.handle}`, children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "relative", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
                         "img",
                         {
                           src: product.images.nodes[0].url,
@@ -6344,26 +6860,92 @@ function Index() {
                           height: "200"
                         }
                       ),
-                      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold", children: "+120%" })
-                    ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "p-4", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h3", { className: "font-bold", children: product.title }),
-                      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("p", { className: "text-purple-400 mt-1", children: [
-                        "$",
-                        product.priceRange.minVariantPrice.amount
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
+                        motion.div,
+                        {
+                          className: `absolute top-2 right-2 bg-green-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold
+                                  shadow-lg border border-green-400 flex items-center`,
+                          animate: {
+                            scale: [1, 1.05, 1],
+                            boxShadow: [
+                              "0 0 0px rgba(34, 197, 94, 0.3)",
+                              "0 0 8px rgba(34, 197, 94, 0.6)",
+                              "0 0 0px rgba(34, 197, 94, 0.3)"
+                            ]
+                          },
+                          transition: { duration: 2, repeat: 1 / 0 },
+                          children: [
+                            /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "mr-1", children: "\u2191" }),
+                            /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("span", { children: [
+                              "+",
+                              120 + index * 40,
+                              "%"
+                            ] })
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "absolute bottom-2 left-2 bg-black/60 text-white px-2 py-1 rounded text-xs backdrop-blur-sm", children: [
+                        "by ",
+                        /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("span", { className: "text-purple-300", children: [
+                          "Creator",
+                          product.id
+                        ] })
                       ] })
+                    ] }),
+                    /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "p-4", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+                        motion.h3,
+                        {
+                          className: "font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300",
+                          whileHover: {
+                            textShadow: "0 0 8px rgba(255,255,255,0.5)"
+                          },
+                          children: product.title
+                        }
+                      ),
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "flex justify-between items-center mt-2", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
+                          motion.p,
+                          {
+                            className: "text-purple-400 font-bold",
+                            animate: { y: [0, -2, 0] },
+                            transition: { duration: 2, repeat: 1 / 0, delay: index * 0.2 },
+                            children: [
+                              "$",
+                              product.priceRange.minVariantPrice.amount
+                            ]
+                          }
+                        ),
+                        /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("p", { className: "text-xs text-gray-400", children: [
+                          800 + index * 123,
+                          " sold"
+                        ] })
+                      ] }),
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+                        motion.button,
+                        {
+                          className: `w-full mt-3 bg-gradient-to-r from-purple-600/90 to-pink-600/90 text-white py-1.5 rounded-lg
+                                 text-sm font-medium`,
+                          whileHover: {
+                            scale: 1.03,
+                            boxShadow: "0 0 12px rgba(168, 85, 247, 0.5)"
+                          },
+                          whileTap: { scale: 0.97 },
+                          children: "Buy Now"
+                        }
+                      )
                     ] })
                   ] })
                 },
                 product.id
               )) })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-12", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex justify-between items-center mb-6", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h2", { className: "text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Categories" }),
-                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_react40.Link, { to: "/collections", className: "text-purple-400 hover:text-purple-300 transition-colors", children: "View All" })
+            /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "mt-12", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "flex justify-between items-center mb-6", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h2", { className: "text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Categories" }),
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react45.Link, { to: "/collections", className: "text-purple-400 hover:text-purple-300 transition-colors", children: "View All" })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-4", children: categories.map((category) => /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+              /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-4", children: categories2.map((category) => /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
                 motion.div,
                 {
                   className: `bg-gradient-to-br ${category.color} p-6 rounded-lg text-white text-center cursor-pointer
@@ -6375,8 +6957,8 @@ function Index() {
                   },
                   whileTap: { y: 0, boxShadow: "0 5px 10px rgba(0,0,0,0.2)" },
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_react40.Link, { to: `/collections/${category.handle}`, className: "block absolute inset-0 z-10", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "sr-only", children: category.title }) }),
-                    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+                    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react45.Link, { to: `/collections/${category.handle}`, className: "block absolute inset-0 z-10", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "sr-only", children: category.title }) }),
+                    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
                       motion.div,
                       {
                         className: "absolute inset-0 bg-white/5",
@@ -6394,8 +6976,8 @@ function Index() {
                         }
                       }
                     ),
-                    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h3", { className: "text-xl font-bold relative z-2", children: category.title }),
-                    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("p", { className: "text-sm mt-1 text-white/80 relative z-2", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h3", { className: "text-xl font-bold relative z-2", children: category.title }),
+                    /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("p", { className: "text-sm mt-1 text-white/80 relative z-2", children: [
                       category.count,
                       "+ shirts"
                     ] })
@@ -6405,33 +6987,95 @@ function Index() {
               )) })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "lg:col-span-1", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-8 bg-[#151522] p-4 rounded-xl border border-[#2c2c44] card-glow", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h2", { className: "text-xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Trending Keywords" }),
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "flex flex-wrap gap-2", children: ["PEPE", "MOON", "DEGEN", "WAGMI", "HODL", "APE", "BULL", "PUMP", "LAMBO", "GEM"].map((keyword) => /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
-                motion.span,
-                {
-                  className: "bg-[#1c1c2e] px-3 py-1 rounded-full text-sm cursor-pointer border border-[#2c2c44]",
-                  whileHover: {
-                    scale: 1.05,
-                    backgroundColor: "#2a2a44",
-                    boxShadow: "0 0 12px rgba(168,85,247,0.5)"
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "lg:col-span-1", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "mt-8 bg-[#151522] p-4 rounded-xl border border-purple-500/20 card-glow", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h2", { className: "text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Trending Keywords" }),
+              /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "mb-4 relative", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+                  "input",
+                  {
+                    type: "text",
+                    placeholder: "Search keywords...",
+                    className: `w-full bg-[#1c1c2e] text-white rounded-lg px-4 py-2 pl-10
+                      border border-purple-500/20 focus:border-purple-500/50 focus:outline-none
+                      focus:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all`
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "absolute left-3 top-2.5 text-purple-400", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("path", { fillRule: "evenodd", d: "M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z", clipRule: "evenodd" }) }) })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "flex flex-wrap gap-2", children: [
+                { keyword: "PEPE", intensity: 95, color: "green" },
+                { keyword: "MOON", intensity: 82, color: "blue" },
+                { keyword: "DEGEN", intensity: 75, color: "pink" },
+                { keyword: "WAGMI", intensity: 65, color: "purple" },
+                { keyword: "HODL", intensity: 60, color: "orange" },
+                { keyword: "APE", intensity: 55, color: "yellow" },
+                { keyword: "BULL", intensity: 50, color: "red" },
+                { keyword: "PUMP", intensity: 48, color: "green" },
+                { keyword: "LAMBO", intensity: 45, color: "blue" },
+                { keyword: "GEM", intensity: 40, color: "indigo" }
+              ].map((item) => {
+                let colorClass = {
+                  green: "text-green-400 bg-green-900/20 border-green-500/20 hover:bg-green-900/40 hover:border-green-500/40",
+                  blue: "text-blue-400 bg-blue-900/20 border-blue-500/20 hover:bg-blue-900/40 hover:border-blue-500/40",
+                  pink: "text-pink-400 bg-pink-900/20 border-pink-500/20 hover:bg-pink-900/40 hover:border-pink-500/40",
+                  purple: "text-purple-400 bg-purple-900/20 border-purple-500/20 hover:bg-purple-900/40 hover:border-purple-500/40",
+                  orange: "text-orange-400 bg-orange-900/20 border-orange-500/20 hover:bg-orange-900/40 hover:border-orange-500/40",
+                  yellow: "text-yellow-400 bg-yellow-900/20 border-yellow-500/20 hover:bg-yellow-900/40 hover:border-yellow-500/40",
+                  red: "text-red-400 bg-red-900/20 border-red-500/20 hover:bg-red-900/40 hover:border-red-500/40",
+                  indigo: "text-indigo-400 bg-indigo-900/20 border-indigo-500/20 hover:bg-indigo-900/40 hover:border-indigo-500/40"
+                }[item.color], fontSize = 12 + item.intensity / 20;
+                return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+                  motion.div,
+                  {
+                    className: `px-3 py-1 rounded-full cursor-pointer
+                             border ${colorClass} transition-all duration-300`,
+                    style: { fontSize: `${fontSize}px` },
+                    whileHover: {
+                      scale: 1.05,
+                      boxShadow: "0 0 12px rgba(168,85,247,0.5)",
+                      y: -2
+                    },
+                    whileTap: { scale: 0.95 },
+                    initial: { opacity: 0, y: 10 },
+                    animate: { opacity: 1, y: 0 },
+                    transition: { delay: Math.random() * 0.3 },
+                    children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "flex items-center", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "mr-1", children: "#" }),
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { children: item.keyword }),
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
+                        motion.span,
+                        {
+                          className: "ml-1.5 text-xs",
+                          animate: {
+                            opacity: [0.7, 1, 0.7],
+                            y: [0, -1, 0]
+                          },
+                          transition: {
+                            duration: 1.5,
+                            repeat: 1 / 0,
+                            delay: Math.random() * 2
+                          },
+                          children: [
+                            "+",
+                            item.intensity,
+                            "%"
+                          ]
+                        }
+                      )
+                    ] })
                   },
-                  children: [
-                    "#",
-                    keyword
-                  ]
-                },
-                keyword
-              )) })
+                  item.keyword
+                );
+              }) })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+            /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
               motion.div,
               {
                 className: "mt-8 bg-gradient-to-r from-indigo-600 to-purple-700 p-6 rounded-xl border border-indigo-400/30 relative overflow-hidden card-glow",
                 whileHover: { scale: 1.02 },
                 children: [
-                  Array.from({ length: 8 }).map((_, i) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+                  Array.from({ length: 8 }).map((_, i) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
                     motion.div,
                     {
                       className: "absolute w-1 h-1 rounded-full bg-white/70",
@@ -6453,9 +7097,9 @@ function Index() {
                     },
                     i
                   )),
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h2", { className: "text-xl font-bold mb-2 text-white relative z-10 neon-text", children: "Create Your Own T-Shirt" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-indigo-200 mb-4 relative z-10", children: "Design, sell, and earn profit share from your own shirt designs!" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_react40.Link, { to: "/pages/custom-shirt", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h2", { className: "text-xl font-bold mb-2 text-white relative z-10 neon-text", children: "Create Your Own T-Shirt" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("p", { className: "text-indigo-200 mb-4 relative z-10", children: "Design, sell, and earn profit share from your own shirt designs!" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react45.Link, { to: "/pages/custom-shirt", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
                     motion.button,
                     {
                       className: "bg-white text-indigo-600 font-bold py-2 px-6 rounded-full hover:bg-indigo-50 transition-colors relative overflow-hidden",
@@ -6464,30 +7108,30 @@ function Index() {
                         boxShadow: "0 0 20px rgba(255,255,255,0.5)"
                       },
                       whileTap: { scale: 0.98 },
-                      children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "relative z-10", children: "Learn More" })
+                      children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "relative z-10", children: "Learn More" })
                     }
                   ) })
                 ]
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-8 bg-[#151522] p-5 rounded-xl border border-[#2c2c44] card-glow", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h2", { className: "text-lg font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Platform Stats" }),
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "grid grid-cols-2 gap-4", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-[#1c1c2e] p-3 rounded-lg border border-[#2c2c44]", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-sm text-gray-400", children: "Total Shirts" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-xl font-bold text-white mt-1", children: stats.totalShirts })
+            /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "mt-8 bg-[#151522] p-5 rounded-xl border border-[#2c2c44] card-glow", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h2", { className: "text-lg font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 neon-text", children: "Platform Stats" }),
+              /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "grid grid-cols-2 gap-4", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "bg-[#1c1c2e] p-3 rounded-lg border border-[#2c2c44]", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "text-sm text-gray-400", children: "Total Shirts" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "text-xl font-bold text-white mt-1", children: stats.totalShirts })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-[#1c1c2e] p-3 rounded-lg border border-[#2c2c44]", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-sm text-gray-400", children: "Sales (24h)" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-xl font-bold text-green-400 mt-1", children: stats.dailySales })
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "bg-[#1c1c2e] p-3 rounded-lg border border-[#2c2c44]", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "text-sm text-gray-400", children: "Sales (24h)" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "text-xl font-bold text-green-400 mt-1", children: stats.dailySales })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-[#1c1c2e] p-3 rounded-lg border border-[#2c2c44]", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-sm text-gray-400", children: "Creators" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-xl font-bold text-white mt-1", children: stats.creators })
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "bg-[#1c1c2e] p-3 rounded-lg border border-[#2c2c44]", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "text-sm text-gray-400", children: "Creators" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "text-xl font-bold text-white mt-1", children: stats.creators })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-[#1c1c2e] p-3 rounded-lg border border-[#2c2c44]", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-sm text-gray-400", children: "Top ROI" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-xl font-bold text-purple-400 mt-1", children: stats.topROI })
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "bg-[#1c1c2e] p-3 rounded-lg border border-[#2c2c44]", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "text-sm text-gray-400", children: "Top ROI" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "text-xl font-bold text-purple-400 mt-1", children: stats.topROI })
                 ] })
               ] })
             ] })
@@ -6499,7 +7143,7 @@ function Index() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-HLJTKMNB.js", imports: ["/build/_shared/chunk-ACDKLXZH.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-SLXJV3JQ.js", imports: ["/build/_shared/chunk-AA45TRBJ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-7UCKJFTM.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/collections.$handle": { id: "routes/collections.$handle", parentId: "root", path: "collections/:handle", index: void 0, caseSensitive: void 0, module: "/build/routes/collections.$handle-Q2Z6OTRA.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/collections._index": { id: "routes/collections._index", parentId: "root", path: "collections", index: !0, caseSensitive: void 0, module: "/build/routes/collections._index-H6L3MTCQ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products.$handle": { id: "routes/products.$handle", parentId: "root", path: "products/:handle", index: void 0, caseSensitive: void 0, module: "/build/routes/products.$handle-TF6FN43O.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "5c87c78a", hmr: void 0, url: "/build/manifest-5C87C78A.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-HLJTKMNB.js", imports: ["/build/_shared/chunk-ACDKLXZH.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-GZ26TJVZ.js", imports: ["/build/_shared/chunk-AA45TRBJ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-JEUAPV57.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/collections.$handle": { id: "routes/collections.$handle", parentId: "root", path: "collections/:handle", index: void 0, caseSensitive: void 0, module: "/build/routes/collections.$handle-Q2Z6OTRA.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/collections._index": { id: "routes/collections._index", parentId: "root", path: "collections", index: !0, caseSensitive: void 0, module: "/build/routes/collections._index-H6L3MTCQ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products.$handle": { id: "routes/products.$handle", parentId: "root", path: "products/:handle", index: void 0, caseSensitive: void 0, module: "/build/routes/products.$handle-TF6FN43O.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "7dd4b890", hmr: void 0, url: "/build/manifest-7DD4B890.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_dev: !1, unstable_postcss: !1, unstable_tailwind: !1, v2_errorBoundary: !0, v2_headers: !1, v2_meta: !0, v2_normalizeFormMethod: !0, v2_routeConvention: !0 }, publicPath = "/build/", entry = { module: entry_server_react_stream_exports }, routes = {
