@@ -1,6 +1,6 @@
-import {useLoaderData} from '@remix-run/react';
+import {useLoaderData, Link} from '@remix-run/react';
 import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {Image, Money, ShopPayButton, AddToCartButton} from '@shopify/hydrogen';
+import {Image} from '@shopify/hydrogen';
 import {motion} from 'framer-motion';
 
 export async function loader({params, context}: LoaderFunctionArgs) {
@@ -117,25 +117,28 @@ export default function ProductPage() {
           <div className="mt-8">
             <div className="flex items-baseline">
               <span className="text-3xl font-bold">
-                <Money data={selectedVariant.price} />
+                ${selectedVariant.price.amount} {selectedVariant.price.currencyCode}
               </span>
             </div>
             
             <div className="mt-10 space-y-4">
-              <ShopPayButton
-                storeDomain={shop.primaryDomain.url}
-                variantIds={[selectedVariant.id]}
+              <button
                 className="flex items-center justify-center bg-[#5A31F4] text-white w-full py-3 rounded-full"
-              />
+                onClick={() => {
+                  // Shop Pay button functionality would go here
+                }}
+              >
+                Check out with Shop Pay
+              </button>
               
-              <AddToCartButton
-                variantId={selectedVariant.id}
-                quantity={1}
+              <button
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg"
-                accessibleAddingToCartLabel="Adding item to your cart"
+                onClick={() => {
+                  // Add to cart functionality would go here
+                }}
               >
                 Add to Cart
-              </AddToCartButton>
+              </button>
             </div>
           </div>
           
@@ -189,7 +192,7 @@ export default function ProductPage() {
                     </span>
                   </div>
                   <p className="mt-2 text-purple-600 font-medium">
-                    <Money data={similar.priceRange.minVariantPrice} />
+                    ${similar.priceRange.minVariantPrice.amount} {similar.priceRange.minVariantPrice.currencyCode}
                   </p>
                   <a 
                     href={`/products/${similar.handle}`}
